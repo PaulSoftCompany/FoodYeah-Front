@@ -14,6 +14,9 @@ import { customerCategory } from 'src/_model/customerCategory';
   styleUrls: ['./register.component.css']
 
 })
+
+//Componenete Registro
+
 export class RegisterComponent implements OnInit {
 
   form:FormGroup;
@@ -43,7 +46,7 @@ export class RegisterComponent implements OnInit {
       customer.username = this.form.value['username'];
       customer.password = this.form.value['password'];
       categoria.id = customer.username[0] === 'u' ? 1 : 2;
-      customer.customerCategory =categoria;
+      customer.customerCategory =categoria ;
       
 
       this.loginservice.register(customer).subscribe(()=>{
