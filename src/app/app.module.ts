@@ -9,12 +9,16 @@ import { HttpClientModule } from '@angular/common/http';
 import { RegisterComponent } from 'src/_pages/login/register/register.component';
 import { LoginComponent } from 'src/_pages/login/login.component';
 import { MatCardModule  } from '@angular/material/card';
+import { HomeComponent } from 'src/_pages/home/home.component';
+import { ProductComponent } from 'src/_pages/product/product.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     RegisterComponent,
+    HomeComponent,
+    ProductComponent
   ],
   imports: [
     BrowserModule,

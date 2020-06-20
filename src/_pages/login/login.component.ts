@@ -34,7 +34,7 @@ export class LoginComponent implements OnInit {
         //const decodedToken = helper.decodeToken(tk.access_token);
 
 
-        this.router.navigate(['']);
+        this.router.navigate(['home']);
 
       }
     });
