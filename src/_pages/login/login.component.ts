@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { LoginService } from 'src/_service/login.service';
+import { Router } from '@angular/router';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-login',
@@ -7,9 +10,33 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LoginComponent implements OnInit {
 
-  constructor() { }
+  username: string;
+  password: string;
+  message: string = "";
+  error: string = "";
 
-  ngOnInit(): void {
+  constructor(private loginService: LoginService, private router: Router) { }
+
+  ngOnInit() {
   }
 
+  logIn() {
+    this.loginService.login(this.username, this.password).subscribe(data => {
+      if (data) {
+        //
+        //const helper = new JwtHelperService();
+
+        let token = JSON.stringify(data);
+        sessionStorage.setItem(environment.TOKEN_NAME, token);
+
+        //let tk = JSON.parse(sessionStorage.getItem(environment.TOKEN_NAME));
+        //https://www.npmjs.com/package/@auth0/angular-jwt
+        //const decodedToken = helper.decodeToken(tk.access_token);
+
+
+        this.router.navigate(['']);
+
+      }
+    });
+  }
 }

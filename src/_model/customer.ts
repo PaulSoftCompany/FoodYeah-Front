@@ -1,10 +1,10 @@
-import { customerCategory } from './customerCategory';
+import { CustomerCategory } from './customerCategory';
 
 export class Customer {
-    userId:number;
+    id:number;
     username:string;
     password:string;
     customerName:string;
     customerAge:number;
-    customerCategory: customerCategory;
+    customerCategory: CustomerCategory;
 }
