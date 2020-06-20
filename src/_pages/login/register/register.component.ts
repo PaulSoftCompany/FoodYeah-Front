@@ -1,12 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { LoginService } from 'src/_service/login.service';
-import {MaterialModule} from 'src/_material/material/material.module'
 import { FormGroup, FormBuilder, FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
 import { PasswordValidation } from './match';
 import { Customer } from 'src/_model/customer';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { customerCategory } from 'src/_model/customerCategory';
+import { CustomerService } from 'src/_service/customer.service';
 
 @Component({
   selector: 'app-register',
@@ -22,7 +21,7 @@ export class RegisterComponent implements OnInit {
   form:FormGroup;
   maxDate:Date;
 
-  constructor(private loginservice: LoginService,private fb: FormBuilder, private router: Router, private matSnackBar: MatSnackBar) { }
+  constructor(private customerService: CustomerService,private fb: FormBuilder, private router: Router, private matSnackBar: MatSnackBar) { }
 
   ngOnInit(): void {
     this.maxDate = new Date();
@@ -49,7 +48,7 @@ export class RegisterComponent implements OnInit {
       customer.customerCategory =categoria ;
       
 
-      this.loginservice.register(customer).subscribe(()=>{
+      this.customerService.register(customer).subscribe(()=>{
         this.matSnackBar.open('Se creó exitosamente','INFO',{
           duration:2000
         });

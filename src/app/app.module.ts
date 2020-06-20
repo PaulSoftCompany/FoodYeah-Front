@@ -5,16 +5,18 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatNativeDateModule} from '@angular/material/core';
+import { MatCardModule  } from '@angular/material/card';
 
 import { MaterialModule } from 'src/_material/material/material.module';
 import { HttpClientModule } from '@angular/common/http';
 import { RegisterComponent } from 'src/_pages/login/register/register.component';
 import { LoginComponent } from 'src/_pages/login/login.component';
+
 @NgModule({
   declarations: [
     AppComponent,
-    RegisterComponent,
     LoginComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,
@@ -22,8 +24,8 @@ import { LoginComponent } from 'src/_pages/login/login.component';
     BrowserAnimationsModule,
     HttpClientModule,
     MaterialModule,
-    MatNativeDateModule
-  
+    MatNativeDateModule,
+    MatCardModule 
  
   ],
   providers: [],

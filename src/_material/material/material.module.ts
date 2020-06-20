@@ -75,7 +75,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
         MatTabsModule,
         MatCardModule,
         MatInputModule,
-
+        
         
     ],
     exports: [
@@ -98,6 +98,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
         MatPaginatorModule,
         FormsModule,
         MatTabsModule,
+        MatCardModule,
         ReactiveFormsModule,
     ],
     providers: [
