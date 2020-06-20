@@ -1,11 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-import { RegisterService } from 'src/_service/register.service';
+
 import {MaterialModule} from 'src/_material/material/material.module'
 import { FormGroup, FormBuilder, FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
 import { PasswordValidation } from './match';
-import { Customer } from 'src/_model/customer';
 import { MatSnackBar } from '@angular/material/snack-bar';
+
+import { RegisterService } from 'src/_service/register.service';
+
+import { Customer } from 'src/_model/customer';
 import { CustomerCategory } from 'src/_model/customerCategory';
 
 @Component({
@@ -21,6 +24,7 @@ export class RegisterComponent implements OnInit {
 
   form:FormGroup;
   maxDate:Date;
+  customer:Customer;
 
   constructor(private registerService: RegisterService,private fb: FormBuilder, private router: Router, private matSnackBar: MatSnackBar) { }
 
@@ -45,14 +49,16 @@ export class RegisterComponent implements OnInit {
       let customerCategory = new CustomerCategory();
       customerCategory.id = customerUsername[0] === 'u' ? 1 : 2;
 
-      let customer = new Customer();
-      customer.customerAge=this.form.value['age'];
-      customer.customerName = this.form.value['firstName'];
-      customer.username = customerUsername;
-      customer.password = this.form.value['password'];
-      customer.customerCategory = customerCategory
+      this.customer = new Customer();
+      this.customer.customerAge=this.form.value['age'];
+      this.customer.customerName = this.form.value['firstName'];
+      this.customer.username = customerUsername;
+      this.customer.password = this.form.value['password'];
+      this.customer.customerCategory = customerCategory
+
+
       
-      this.registerService.register(customer).subscribe(()=>{
+      this.registerService.register(this.customer).subscribe((_customer:Customer)=>{
         this.matSnackBar.open('Se creó exitosamente','INFO',{
           duration:2000
         });
@@ -60,6 +66,19 @@ export class RegisterComponent implements OnInit {
         setTimeout(() => {
           this.router.navigate(['login']);
         }, 1500);
+
+      }); 
+
+      /*
+      this.registerService.assignRole(this.customer).subscribe(()=>{
+        this.matSnackBar.open('Se creó exitosamente','INFO',{
+          duration:2000
+        });
+        
+        setTimeout(() => {
+          this.router.navigate(['login']);
+        }, 1500);
       });
+      */
   } 
 }
