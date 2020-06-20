@@ -1,0 +1,32 @@
+
+<form [formGroup]="form" (ngSubmit)="registerUser()">
+    <mat-tab-group>
+        <mat-tab label="Datos del usuario">
+
+            <mat-form-field>
+                <input matInput placeholder="Nombre" formControlName="firstName">
+            </mat-form-field>
+
+            <mat-form-field>
+                <input matInput placeholder="Codigo institucional" formControlName="username">
+            </mat-form-field>
+
+            <mat-form-field>
+                <input matInput type="number" placeholder="Edad" formControlName="age"
+                    [formGroup]="form" required>
+            </mat-form-field>
+
+            <mat-form-field>
+                <input matInput type="password" name="password" placeholder="Contraseña" formControlName="password"
+                    [formGroup]="form" required>
+            </mat-form-field>
+
+            <mat-form-field>
+                <input matInput type="password" placeholder="Repetir contraseña" formControlName="confirmPassword"
+                    [formGroup]="form" required>
+            </mat-form-field>
+
+            <button mat-raised-button color="primary" type="submit">Registrar</button>
+        </mat-tab>
+    </mat-tab-group>
+</form>
