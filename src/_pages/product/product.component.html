@@ -4,7 +4,7 @@
 
     <div class="example-header">
         <mat-form-field>
-            <input matInput placeholder="Buscar Producto">
+            <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Buscar Productos">
         </mat-form-field>
     </div>
 
@@ -35,8 +35,8 @@
         <ng-container matColumnDef="acciones">
             <mat-header-cell *matHeaderCellDef>Acciones</mat-header-cell>
             <mat-cell *matCellDef="let row">
-                <button mat-button color="primary" >Actualizar</button>
-                <button mat-button color="accent" >Eliminar</button>
+                <button mat-button color="primary" (click)="openDialog(row)">Actualizar</button>
+                <button mat-button color="accent" (click)="delete(row)">Eliminar</button>
             </mat-cell>
         </ng-container>
 
@@ -50,6 +50,6 @@
 
 <br>
 
-<button mat-fab color="accent" style="float: right; margin-right: 20px">
+<button mat-fab color="accent" (click)="openDialog(null)" style="float: right; margin-right: 20px">
     <mat-icon>create</mat-icon>
 </button>

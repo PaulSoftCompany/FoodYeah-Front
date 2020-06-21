@@ -56,9 +56,7 @@ export class RegisterComponent implements OnInit {
       this.customer.password = this.form.value['password'];
       this.customer.customerCategory = customerCategory
 
-
-      
-      this.registerService.register(this.customer).subscribe((_customer:Customer)=>{
+      this.registerService.register(this.customer).subscribe(()=>{
         this.matSnackBar.open('Se creó exitosamente','INFO',{
           duration:2000
         });

@@ -11,6 +11,7 @@ import { LoginComponent } from 'src/_pages/login/login.component';
 import { MatCardModule  } from '@angular/material/card';
 import { HomeComponent } from 'src/_pages/home/home.component';
 import { ProductComponent } from 'src/_pages/product/product.component';
+import { ProductdialogComponent } from 'src/_pages/product/productdialog/productdialog.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { ProductComponent } from 'src/_pages/product/product.component';
     LoginComponent,
     RegisterComponent,
     HomeComponent,
-    ProductComponent
+    ProductComponent,
+    ProductdialogComponent
   ],
   imports: [
     BrowserModule,

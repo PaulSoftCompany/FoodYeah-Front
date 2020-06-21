@@ -1,0 +1,20 @@
+<div class="example-container">
+    <mat-form-field>
+        <input matInput placeholder="Nombre" [(ngModel)]="_product.productName">
+    </mat-form-field>
+    <mat-form-field>
+        <input matInput placeholder="Precio Unitario" [(ngModel)]="_product.productPrice">
+    </mat-form-field>
+    <mat-form-field>
+        <input matInput placeholder="Stock" [(ngModel)]="_product.stock">
+    </mat-form-field>
+    <mat-form-field>
+        <input matInput placeholder="Dia de Venta" [(ngModel)]="_product.sellday">
+    </mat-form-field>
+    <mat-form-field>
+        <input matInput placeholder="Categoría" [(ngModel)]="_productCategory.id">
+    </mat-form-field>
+
+</div>
+<button mat-raised-button color="primary" (click)="registerOrUpdate()">Aceptar</button>
+<button mat-raised-button color="accent" (click)="cancel()">Cancelar</button>

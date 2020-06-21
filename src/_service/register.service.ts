@@ -11,13 +11,7 @@ url:string= `${environment.HOST_URL}/customers`;
   constructor(private http:HttpClient) { }
 
   register(customer: Customer){
-    const options = {
-      headers: new HttpHeaders().append('Content-Type', 'application/json'),
-      params: new HttpParams().append('headers', 'headers')
-    }
-
-    var _customer = this.http.post(this.url,JSON.stringify(customer), options);
-    return _customer;
+    return this.http.post(this.url,customer);
   }
 
   assignRole(customer: Customer){
