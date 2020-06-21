@@ -26,7 +26,9 @@ export class RegisterComponent implements OnInit {
   maxDate:Date;
   customer:Customer;
 
-  constructor(private registerService: RegisterService,private fb: FormBuilder, private router: Router, private matSnackBar: MatSnackBar) { }
+  constructor(private registerService: RegisterService
+    ,private fb: FormBuilder, private router: Router
+    ,  private matSnackBar: MatSnackBar) { }
 
   ngOnInit(): void {
 

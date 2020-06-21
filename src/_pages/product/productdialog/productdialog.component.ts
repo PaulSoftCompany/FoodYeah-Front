@@ -4,6 +4,9 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Product } from 'src/_model/product';
 import { ProductService } from 'src/_service/product.service';
 import { ProductCategory } from 'src/_model/productCategory';
+import { FormGroup, FormBuilder, FormControl } from '@angular/forms';
+import { Router } from '@angular/router';
+import { CustomerCategory } from 'src/_model/customerCategory';
 
 
 @Component({
@@ -13,48 +16,58 @@ import { ProductCategory } from 'src/_model/productCategory';
 })
 export class ProductdialogComponent implements OnInit {
 
-
+  form:FormGroup;
   product: Product;
+  ingredients:Array<string>;
 
-  constructor(private dialogRef: MatDialogRef<ProductdialogComponent>,
-    @Inject(MAT_DIALOG_DATA) public _product: Product, @Inject(MAT_DIALOG_DATA) public _productCategory: ProductCategory,
-    private productService: ProductService) { }
+  constructor(
+    private productService: ProductService, private fb:FormBuilder,
+    private router:Router, private dialogRef: MatDialogRef<ProductdialogComponent>) { 
 
-  ngOnInit() {
-    let productCategory = new ProductCategory();
-    productCategory.id = this._productCategory.id;
+      this.ingredients = new Array<string>();
 
-    this.product = new Product();
-    this.product.id = this._product.id;
-    this.product.productName = this._product.productName;
-    this.product.productPrice = this._product.productPrice;
-    this.product.stock = this._product.stock;
-    this.product.sellday = this._product.sellday;
-    this.product.productCategory = productCategory;
-  }
 
-  cancel() {
-    this.dialogRef.close();
-  }
-
-  registerOrUpdate() {
-
-    if (this.product != null && this.product.id > 0) {
-      this.productService.updateProduct(this.product.id, this.product).subscribe(data => {
-        this.productService.getAllProducts().subscribe(products => {
-          this.productService.productsChange.next(products);
-          this.productService.message.next("Se modifico");
-        });
-      });
-    } else {
-      this.productService.registerProduct(this.product).subscribe(data => {
-        this.productService.getAllProducts().subscribe(products => {
-          this.productService.productsChange.next(products);
-          this.productService.message.next("Se registro");
-        });
-      });
     }
-    this.dialogRef.close();
+
+  ngOnInit()  {
+    this.form=this.fb.group({
+      productName: new FormControl(''),
+      productPrice:  new FormControl(''),
+      stock:  new FormControl(''),
+      sellDay:  new FormControl(''),
+      category:new FormControl('')
+    });
+
+
+  }
+      register() {
+        let productCategory = new ProductCategory();
+        productCategory.id =  this.form.value['category'];
+
+        
+
+
+        this.product = new Product();
+        this.product.productName = this.form.value['productName'];
+        this.product.stock = this.form.value['stock'];
+        this.product.productPrice= this.form.value['productPrice'];
+        this.product.sellday = this.form.value['sellDay'];
+        this.product.category =productCategory;
+        this.product.imageUrl = "test";
+        this.product.ingredients = this.ingredients;
+
+
+
+        console.log( productCategory.id );
+        this.productService.registerProduct(this.product).subscribe(
+          ()=>{
+            this.dialogRef.close();
+            console.log("Creado");
+          }
+        );
+  }
+  AddIngredients(newIngredient:string){
+    this.ingredients.push(newIngredient);
   }
 
 }

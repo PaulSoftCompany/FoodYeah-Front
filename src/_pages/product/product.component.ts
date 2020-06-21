@@ -48,12 +48,10 @@ applyFilter(filterValue: string) {
   this.dataSource.filter = filterValue;
 }
 
-openDialog(product: Product) {
-  let productDialog = product != null ? product : new Product();
+openDialog() {
   this.dialog.open(ProductdialogComponent, {
     width: '250px',
     disableClose: true,
-    data: productDialog
   })
 }
 

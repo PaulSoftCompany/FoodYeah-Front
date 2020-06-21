@@ -6,7 +6,7 @@ export class Product {
    productPrice:number;
    sellday:number;
    stock:number;
-   imageUrl:number;
-   ingredients:[''];
-   productCategory:ProductCategory;
+   imageUrl:string;
+   ingredients:Array<string>;
+   category:ProductCategory;
 }
