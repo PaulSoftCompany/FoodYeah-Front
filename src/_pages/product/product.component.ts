@@ -7,6 +7,8 @@ import { Product } from 'src/_model/product';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { ProductdialogComponent } from './productdialog/productdialog.component';
+import { filter, map } from 'rxjs/operators';
+
 
 @Component({
   selector: 'app-product',
@@ -16,7 +18,7 @@ import { ProductdialogComponent } from './productdialog/productdialog.component'
 export class ProductComponent implements OnInit {
 
   dataSource: MatTableDataSource<Product>;
-  displayedColumns: string[] = ['nombre','precio','stock', 'acciones'];
+  displayedColumns: string[] = ['nombre','precio','stock', 'acciones','state'];
   @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator;
   @ViewChild(MatSort, { static: false }) sort: MatSort;
 
@@ -30,10 +32,11 @@ export class ProductComponent implements OnInit {
       this.dataSource.sort = this.sort;
     });
 
+    
+
     this.productService.message.subscribe(data => {
       this.snackBar.open(data, 'Aviso', { duration: 2000 });
     });
-  
   
     this.productService.getAllProducts().subscribe(data => {
       this.dataSource = new MatTableDataSource<Product>(data);
@@ -48,10 +51,14 @@ applyFilter(filterValue: string) {
   this.dataSource.filter = filterValue;
 }
 
-openDialog() {
+
+
+openDialog(product?: Product) {
+  let productdialog = product != null ? product : new Product();
   this.dialog.open(ProductdialogComponent, {
     width: '250px',
     disableClose: true,
+    data: productdialog
   })
 }
 

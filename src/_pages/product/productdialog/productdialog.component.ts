@@ -7,6 +7,7 @@ import { ProductCategory } from 'src/_model/productCategory';
 import { FormGroup, FormBuilder, FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
 import { CustomerCategory } from 'src/_model/customerCategory';
+import { VirtualTimeScheduler } from 'rxjs';
 
 
 @Component({
@@ -19,10 +20,9 @@ export class ProductdialogComponent implements OnInit {
   form:FormGroup;
   product: Product;
   ingredients:Array<string>;
-
-  constructor(
-    private productService: ProductService, private fb:FormBuilder,
-    private router:Router, private dialogRef: MatDialogRef<ProductdialogComponent>) { 
+  Creado: Boolean;
+  constructor(private productService: ProductService, private fb:FormBuilder, @Inject (MAT_DIALOG_DATA) public data: Product, 
+  private router:Router, private dialogRef: MatDialogRef<ProductdialogComponent>) { 
 
       this.ingredients = new Array<string>();
 
@@ -30,24 +30,49 @@ export class ProductdialogComponent implements OnInit {
     }
 
   ngOnInit()  {
-    this.form=this.fb.group({
-      productName: new FormControl(''),
-      productPrice:  new FormControl(''),
-      stock:  new FormControl(''),
-      sellDay:  new FormControl(''),
-      category:new FormControl('')
-    });
+    this.product = new Product();
+    this.product.productName = this.data.productName;
+    this.product.stock =  this.data.stock;
+    this.product.productPrice=  this.data.productPrice;
+    this.product.sellday =  this.data.sellday;
+    this.product.category =this.data.category;
+    this.product.imageUrl = "test";
+    this.product.id = this.data.id;
+    this.product.ingredients = this.ingredients;
+    this.product.category = this.data.category;
 
+    
+     this.Creado = new Boolean();
+     this.Creado = false;
+        if(this.product != null && this.product.id > 0){
+          this.Creado = true;
+        }
+
+      if(this.Creado == true){
+        this.ingredients = this.data.ingredients;
+      this.form=this.fb.group({
+      productName: new FormControl(this.product.productName),
+      productPrice:  new FormControl(this.data.productPrice),
+      stock:  new FormControl(this.data.stock),
+      sellDay:  new FormControl(this.data.sellday),
+      category:new FormControl(this.data.category.id)
+    });}
+    else {
+      this.ingredients = new Array<string>();
+
+      this.form=this.fb.group({
+        productName: new FormControl(''),
+        productPrice:  new FormControl(''),
+        stock:  new FormControl(''),
+        sellDay:  new FormControl(''),
+        category:new FormControl('')
+      });
+    }
 
   }
-      register() {
+      registerOrUpdate() {
         let productCategory = new ProductCategory();
         productCategory.id =  this.form.value['category'];
-
-        
-
-
-        this.product = new Product();
         this.product.productName = this.form.value['productName'];
         this.product.stock = this.form.value['stock'];
         this.product.productPrice= this.form.value['productPrice'];
@@ -56,18 +81,29 @@ export class ProductdialogComponent implements OnInit {
         this.product.imageUrl = "test";
         this.product.ingredients = this.ingredients;
 
-
-
-        console.log( productCategory.id );
+        if(this.Creado == false){
+          this.product.id = null;
         this.productService.registerProduct(this.product).subscribe(
           ()=>{
             this.dialogRef.close();
             console.log("Creado");
           }
-        );
+        );}
+        else{
+          this.productService.updateProduct(this.product.id,this.product).subscribe(
+            ()=>{
+              this.dialogRef.close();
+              console.log("updated");
+            }
+          )
+        }
+        
   }
   AddIngredients(newIngredient:string){
     this.ingredients.push(newIngredient);
+  }
+  DeleteLastIngredient(){
+    this.ingredients.pop();
   }
 
 }

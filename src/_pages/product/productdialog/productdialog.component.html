@@ -1,5 +1,5 @@
 
-<form [formGroup]="form" (ngSubmit)="register()">
+<form [formGroup]="form" (ngSubmit)="registerOrUpdate()">
     <mat-tab-group>
         <mat-tab label="Producto">
 
@@ -27,7 +27,7 @@
             </mat-form-field>
 
             <mat-form-field>
-                <input matInput placeholder="Ingredientes"  #newHero>
+                <input matInput placeholder="Ingredientes"  #newProduct>
             </mat-form-field>
 
            <br>
@@ -35,8 +35,11 @@
             <li *ngFor="let ingredient of ingredients">
                 {{ ingredient }}
               </li>
-              <button mat-button type='button' color="warn" (click)="AddIngredients(newHero.value)"> Agregar Ingredientes
+              <button mat-button type='button' color="warn" (click)="AddIngredients(newProduct.value)"> Agregar Ingredientes
                 <mat-icon>add</mat-icon>
+              </button>
+              <button mat-button type='button' color="warn" (click)="DeleteLastIngredient()"> Borrar Ingredientes
+                <mat-icon>delete</mat-icon>
               </button>
           <br>
 

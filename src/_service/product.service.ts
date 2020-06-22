@@ -21,6 +21,8 @@ export class ProductService {
     return this.http.get<Product[]>(this.url, {
       headers: new HttpHeaders().set('Authorization',
         `bearer ${access_token}`).set('Content-Type', 'application/json')
+
+
     });
   }
 

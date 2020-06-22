@@ -10,8 +10,8 @@
 
 
       
-
-        <ng-container matColumnDef="nombre">
+     
+        <ng-container matColumnDef="nombre" >
             <mat-header-cell *matHeaderCellDef mat-sort-header> Nombre </mat-header-cell>
             <mat-cell *matCellDef="let row"> {{row.productName}} </mat-cell>
         </ng-container>
@@ -27,19 +27,23 @@
             <mat-cell *matCellDef="let row"> {{row.stock}} </mat-cell>
         </ng-container>
 
+        <ng-container matColumnDef="state">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> Estado </mat-header-cell>
+            <mat-cell *matCellDef="let row"> {{row.state}} </mat-cell>
+        </ng-container>
 
 
 
         <ng-container matColumnDef="acciones">
             <mat-header-cell *matHeaderCellDef>Acciones</mat-header-cell>
             <mat-cell *matCellDef="let row">
-                <button mat-button color="primary" >Actualizar</button>
-                <button mat-button color="accent" >Eliminar</button>
+                <button mat-button color="primary"  (click)="openDialog(row)" >Actualizar</button>
+                <button mat-button color="accent" (click)="delete(row)">Eliminar</button>
             </mat-cell>
         </ng-container>
-
+   
         <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-        <mat-row *matRowDef="let row; columns: displayedColumns;">
+        <mat-row  *matRowDef="let row; columns: displayedColumns;"  >
         </mat-row>
     </mat-table>
 
@@ -47,7 +51,6 @@
 </div>
 
 <br>
-
 <button mat-fab color="accent" (click)="openDialog()" style="float: right; margin-right: 20px">
     <mat-icon>create</mat-icon>
 </button>

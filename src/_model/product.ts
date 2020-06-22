@@ -9,4 +9,5 @@ export class Product {
    imageUrl:string;
    ingredients:Array<string>;
    category:ProductCategory;
+   state:string;
 }
