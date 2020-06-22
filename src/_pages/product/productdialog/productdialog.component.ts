@@ -23,10 +23,7 @@ export class ProductdialogComponent implements OnInit {
   Creado: Boolean;
   constructor(private productService: ProductService, private fb:FormBuilder, @Inject (MAT_DIALOG_DATA) public data: Product, 
   private router:Router, private dialogRef: MatDialogRef<ProductdialogComponent>) { 
-
       this.ingredients = new Array<string>();
-
-
     }
 
   ngOnInit()  {
@@ -49,6 +46,7 @@ export class ProductdialogComponent implements OnInit {
         }
 
       if(this.Creado == true){
+
         this.ingredients = this.data.ingredients;
       this.form=this.fb.group({
       productName: new FormControl(this.product.productName),
@@ -56,7 +54,9 @@ export class ProductdialogComponent implements OnInit {
       stock:  new FormControl(this.data.stock),
       sellDay:  new FormControl(this.data.sellday),
       category:new FormControl(this.data.category.id)
-    });}
+    });
+
+  }
     else {
       this.ingredients = new Array<string>();
 
@@ -68,7 +68,6 @@ export class ProductdialogComponent implements OnInit {
         category:new FormControl('')
       });
     }
-
   }
       registerOrUpdate() {
         let productCategory = new ProductCategory();

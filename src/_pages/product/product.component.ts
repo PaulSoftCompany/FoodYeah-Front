@@ -8,14 +8,17 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { ProductdialogComponent } from './productdialog/productdialog.component';
 import { filter, map } from 'rxjs/operators';
+import { trigger, state, style, animate, transition } from '@angular/animations';
 
 
 @Component({
   selector: 'app-product',
   templateUrl: './product.component.html',
-  styleUrls: ['./product.component.css']
+  styleUrls: ['./product.component.css'],
+  
 })
 export class ProductComponent implements OnInit {
+
 
   dataSource: MatTableDataSource<Product>;
   displayedColumns: string[] = ['nombre','precio','stock', 'acciones','state'];
@@ -30,6 +33,7 @@ export class ProductComponent implements OnInit {
       this.dataSource = new MatTableDataSource<Product>(data);
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
+      this.dataSource.filter = "CREATED";
     });
 
     
