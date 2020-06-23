@@ -8,6 +8,8 @@ import { FormGroup, FormBuilder, FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
 import { CustomerCategory } from 'src/_model/customerCategory';
 import { VirtualTimeScheduler } from 'rxjs';
+import { promise } from 'protractor';
+import { ProductCategoryService } from 'src/_service/productcategory.service';
 
 
 @Component({
@@ -17,12 +19,13 @@ import { VirtualTimeScheduler } from 'rxjs';
 })
 export class ProductdialogComponent implements OnInit {
 
+  opciones: Array<ProductCategory>;
   form:FormGroup;
   product: Product;
   ingredients:Array<string>;
   Creado: Boolean;
   constructor(private productService: ProductService, private fb:FormBuilder, @Inject (MAT_DIALOG_DATA) public data: Product, 
-  private router:Router, private dialogRef: MatDialogRef<ProductdialogComponent>) { 
+  private router:Router, private dialogRef: MatDialogRef<ProductdialogComponent>, private productcategoryService: ProductCategoryService) { 
       this.ingredients = new Array<string>();
     }
 
@@ -33,12 +36,17 @@ export class ProductdialogComponent implements OnInit {
     this.product.productPrice=  this.data.productPrice;
     this.product.sellday =  this.data.sellday;
     this.product.category =this.data.category;
-    this.product.imageUrl = "test";
+    this.product.imageUrl = this.data.imageUrl;
     this.product.id = this.data.id;
     this.product.ingredients = this.ingredients;
     this.product.category = this.data.category;
 
     
+    this.productcategoryService.getAllProductsCategories().subscribe(
+      data =>{this.opciones = data} );
+    
+
+
      this.Creado = new Boolean();
      this.Creado = false;
         if(this.product != null && this.product.id > 0){
@@ -46,13 +54,13 @@ export class ProductdialogComponent implements OnInit {
         }
 
       if(this.Creado == true){
-
         this.ingredients = this.data.ingredients;
       this.form=this.fb.group({
       productName: new FormControl(this.product.productName),
       productPrice:  new FormControl(this.data.productPrice),
       stock:  new FormControl(this.data.stock),
       sellDay:  new FormControl(this.data.sellday),
+      imageUrl: new FormControl(this.data.imageUrl),
       category:new FormControl(this.data.category.id)
     });
 
@@ -65,19 +73,23 @@ export class ProductdialogComponent implements OnInit {
         productPrice:  new FormControl(''),
         stock:  new FormControl(''),
         sellDay:  new FormControl(''),
-        category:new FormControl('')
+        category:new FormControl(''),
+        imageUrl: new FormControl('')
       });
     }
   }
       registerOrUpdate() {
+
+
         let productCategory = new ProductCategory();
-        productCategory.id =  this.form.value['category'];
+        productCategory = this.form.value['category'];
+        console.log(productCategory.productCategoryName);
         this.product.productName = this.form.value['productName'];
         this.product.stock = this.form.value['stock'];
         this.product.productPrice= this.form.value['productPrice'];
         this.product.sellday = this.form.value['sellDay'];
         this.product.category =productCategory;
-        this.product.imageUrl = "test";
+        this.product.imageUrl = this.form.value['imageUrl'];
         this.product.ingredients = this.ingredients;
 
         if(this.Creado == false){

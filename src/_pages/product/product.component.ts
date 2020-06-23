@@ -19,7 +19,7 @@ import { trigger, state, style, animate, transition } from '@angular/animations'
 })
 export class ProductComponent implements OnInit {
 
-
+  products: Array<Product>;
   dataSource: MatTableDataSource<Product>;
   displayedColumns: string[] = ['nombre','precio','stock', 'acciones','state'];
   @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator;
@@ -46,6 +46,7 @@ export class ProductComponent implements OnInit {
       this.dataSource = new MatTableDataSource<Product>(data);
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
+      this.products = data;
     });
   }
 

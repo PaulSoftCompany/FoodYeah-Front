@@ -12,6 +12,7 @@ import { MatCardModule  } from '@angular/material/card';
 import { HomeComponent } from 'src/_pages/home/home.component';
 import { ProductComponent } from 'src/_pages/product/product.component';
 import { ProductdialogComponent } from 'src/_pages/product/productdialog/productdialog.component';
+import { ProductlistComponent } from 'src/_pages/product/productlist/productlist.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { ProductdialogComponent } from 'src/_pages/product/productdialog/product
     RegisterComponent,
     HomeComponent,
     ProductComponent,
-    ProductdialogComponent
+    ProductdialogComponent,
+    ProductlistComponent
   ],
   imports: [
     BrowserModule,
