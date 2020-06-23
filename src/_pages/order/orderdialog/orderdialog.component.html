@@ -1,0 +1,28 @@
+<div class="example-container">
+    <mat-form-field>
+        <input matInput placeholder="Nombre del producto" [(ngModel)]="product.productName">
+    </mat-form-field>
+
+    <mat-form-field>
+        <input matInput type="number" placeholder="Precio" [(ngModel)]="product.productPrice">
+    </mat-form-field>
+
+    <mat-form-field>
+        <input matInput type="number" placeholder="Stock" [(ngModel)]="product.stock">
+    </mat-form-field>
+
+    <mat-form-field>
+        <input matInput type="number" placeholder="Dia de Venta" [(ngModel)]="product.sellday">
+    </mat-form-field>
+
+
+
+    <mat-form-field>
+        <input matInput placeholder="Ingredientes" id="ingridient">
+    </mat-form-field>
+</div>
+
+<br>
+<button mat-raised-button color="primary" type="registerOrUpdate()">Guardar</button>
+<button mat-raised-button color="accent" (click)="cancelar()">Cancelar</button>
+<br>
