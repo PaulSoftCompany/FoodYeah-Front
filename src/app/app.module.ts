@@ -15,6 +15,7 @@ import { ProductdialogComponent } from 'src/_pages/product/productdialog/product
 import { MatTableModule } from '@angular/material/table';
 import { OrderdialogComponent } from 'src/_pages/order/orderdialog/orderdialog.component';
 import { OrderComponent } from 'src/_pages/order/order.component';
+import { ProductlistComponent } from 'src/_pages/product/productlist/productlist.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { OrderComponent } from 'src/_pages/order/order.component';
     ProductComponent,
     ProductdialogComponent,
     OrderComponent,
-    OrderdialogComponent
+    OrderdialogComponent,
+    ProductlistComponent
   ],
   imports: [
     BrowserModule,
