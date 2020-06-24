@@ -1,28 +1,41 @@
 <div class="example-container">
     <mat-form-field>
-        <input matInput placeholder="Nombre del producto" [(ngModel)]="product.productName">
+        <input matInput placeholder="Customer" [(ngModel)]="customer.id">
     </mat-form-field>
 
     <mat-form-field>
-        <input matInput type="number" placeholder="Precio" [(ngModel)]="product.productPrice">
+        <input matInput placeholder="Product" #product>
     </mat-form-field>
 
     <mat-form-field>
-        <input matInput type="number" placeholder="Stock" [(ngModel)]="product.stock">
+        <input matInput placeholder="Quantity" #quantity>
     </mat-form-field>
 
-    <mat-form-field>
-        <input matInput type="number" placeholder="Dia de Venta" [(ngModel)]="product.sellday">
-    </mat-form-field>
+    <br>
+    <P> OrderDetails </P>
+    <table style="width:100%">
+        <tr>
+            <th>Producto</th>
+            <th>Cantidad</th>
+        </tr>
+        <tr *ngFor="let orderDetails of orderDetails">
+            <td>{{orderDetails.product.id}}</td>
+            <td>{{orderDetails.quantity}}</td>
+        </tr>
+    </table>
 
-
-
-    <mat-form-field>
-        <input matInput placeholder="Ingredientes" id="ingridient">
-    </mat-form-field>
+    <br>
+    <button mat-button type='button' color="primary" (click)="AddOrderDetail(product.value, quantity.value)">
+        Agregar OrderDetail
+        <mat-icon>add</mat-icon>
+    </button>
+    <button mat-button type='button' color="warn" (click)="DeleteLastOrderDetial()"> Borrar OrderDetail
+        <mat-icon>delete</mat-icon>
+    </button>
+    <br>
 </div>
 
 <br>
-<button mat-raised-button color="primary" type="registerOrUpdate()">Guardar</button>
-<button mat-raised-button color="accent" (click)="cancelar()">Cancelar</button>
+<button mat-raised-button color="primary" (click)="register()">Registrar</button>
+<button mat-raised-button color="accent" (click)="close()">Cancelar</button>
 <br>

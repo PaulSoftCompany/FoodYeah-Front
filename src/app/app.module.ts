@@ -12,6 +12,9 @@ import { MatCardModule  } from '@angular/material/card';
 import { HomeComponent } from 'src/_pages/home/home.component';
 import { ProductComponent } from 'src/_pages/product/product.component';
 import { ProductdialogComponent } from 'src/_pages/product/productdialog/productdialog.component';
+import { MatTableModule } from '@angular/material/table';
+import { OrderdialogComponent } from 'src/_pages/order/orderdialog/orderdialog.component';
+import { OrderComponent } from 'src/_pages/order/order.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +23,9 @@ import { ProductdialogComponent } from 'src/_pages/product/productdialog/product
     RegisterComponent,
     HomeComponent,
     ProductComponent,
-    ProductdialogComponent
+    ProductdialogComponent,
+    OrderComponent,
+    OrderdialogComponent
   ],
   imports: [
     BrowserModule,
@@ -29,7 +34,8 @@ import { ProductdialogComponent } from 'src/_pages/product/productdialog/product
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
-    MatCardModule 
+    MatCardModule,
+    MatTableModule
   ],
   providers: [],
   bootstrap: [AppComponent]

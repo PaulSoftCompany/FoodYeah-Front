@@ -1,0 +1,13 @@
+mat-table {
+    width: 90%;
+    margin: 0px 70px 5px;
+    box-shadow: 0px 35px 50px rgba( 0, 0, 0, 0.2 );
+  }
+  mat-paginator {
+    width: 90%;
+    margin: 0px 70px 0px;
+    box-shadow: 0px 35px 50px rgba( 0, 0, 0, 0.2 );
+  }
+  mat-form-field {
+    margin: 0px 70px 0px;
+  }

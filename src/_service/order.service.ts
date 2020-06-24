@@ -1,48 +1,32 @@
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Product } from 'src/_model/product';
+import { Order } from 'src/_model/order';
 import { Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
-export class ProductService {
+export class OrderService {
 
-  productsChange = new Subject<Product[]>();
+  ordersChange = new Subject<Order[]>();
   message = new Subject<string>();
 
-  url:string = `${environment.HOST_URL}/products`;
+  url:string = `${environment.HOST_URL}/orders`;
 
   constructor(private http: HttpClient) { }
 
-  getAllProducts(){
+  getAllOrders(){
     let access_token = JSON.parse(sessionStorage.getItem(environment.TOKEN_NAME)).access_token;
-    return this.http.get<Product[]>(this.url, {
+    return this.http.get<Order[]>(this.url, {
       headers: new HttpHeaders().set('Authorization',
         `bearer ${access_token}`).set('Content-Type', 'application/json')
-
-
     });
   }
 
-  registerProduct(products: Product) {
+  registerOrder(orders: Order) {
     let access_token = JSON.parse(sessionStorage.getItem(environment.TOKEN_NAME)).access_token;
-    return this.http.post(this.url, products, {
-      headers: new HttpHeaders().set('Authorization', `bearer ${access_token}`).set('Content-Type', 'application/json')
-    });
-  }
-
-  updateProduct(productsId: number, products: Product) {
-    let access_token = JSON.parse(sessionStorage.getItem(environment.TOKEN_NAME)).access_token;
-    return this.http.put(`${this.url}/${productsId}`, products, {
-      headers: new HttpHeaders().set('Authorization', `bearer ${access_token}`).set('Content-Type', 'application/json')
-    });
-  }
-
-  deleteProduct(productsId: number) {
-    let access_token = JSON.parse(sessionStorage.getItem(environment.TOKEN_NAME)).access_token;
-    return this.http.delete(`${this.url}/${productsId}`, {
+    return this.http.post(this.url, orders, {
       headers: new HttpHeaders().set('Authorization', `bearer ${access_token}`).set('Content-Type', 'application/json')
     });
   }

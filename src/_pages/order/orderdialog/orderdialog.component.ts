@@ -1,108 +1,66 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
+import { Order } from 'src/_model/order';
+import { OrderService } from 'src/_service/order.service';
+
 import { Product } from 'src/_model/product';
-import { ProductService } from 'src/_service/product.service';
-import { ProductCategory } from 'src/_model/productCategory';
-import { FormGroup, FormBuilder, FormControl } from '@angular/forms';
-import { Router } from '@angular/router';
-import { CustomerCategory } from 'src/_model/customerCategory';
-import { VirtualTimeScheduler } from 'rxjs';
+import { OrderDetail } from 'src/_model/orderDetail';
+import { Customer } from 'src/_model/customer';
+
 
 
 @Component({
-  selector: 'app-productdialog',
-  templateUrl: './productdialog.component.html',
-  styleUrls: ['./productdialog.component.css']
+  selector: 'app-orderdialog',
+  templateUrl: './orderdialog.component.html',
+  styleUrls: ['./orderdialog.component.css']
 })
-export class ProductdialogComponent implements OnInit {
 
-  form:FormGroup;
-  product: Product;
-  ingredients:Array<string>;
-  Creado: Boolean;
-  constructor(private productService: ProductService, private fb:FormBuilder, @Inject (MAT_DIALOG_DATA) public data: Product, 
-  private router:Router, private dialogRef: MatDialogRef<ProductdialogComponent>) { 
-      this.ingredients = new Array<string>();
-    }
+export class OrderdialogComponent implements OnInit {
+  customer: Customer;
+  order: Order;
+  orderDetails: Array<OrderDetail>;
 
-  ngOnInit()  {
-    this.product = new Product();
-    this.product.productName = this.data.productName;
-    this.product.stock =  this.data.stock;
-    this.product.productPrice=  this.data.productPrice;
-    this.product.sellday =  this.data.sellday;
-    this.product.category =this.data.category;
-    this.product.imageUrl = "test";
-    this.product.id = this.data.id;
-    this.product.ingredients = this.ingredients;
-    this.product.category = this.data.category;
+  constructor(private orderService: OrderService, @Inject(MAT_DIALOG_DATA) public data: Customer
+    , private dialogRef: MatDialogRef<OrderdialogComponent>) { }
 
-    
-     this.Creado = new Boolean();
-     this.Creado = false;
-        if(this.product != null && this.product.id > 0){
-          this.Creado = true;
-        }
+  ngOnInit() {
+    this.orderDetails = new Array<OrderDetail>();
+    this.order = new Order();
+    this.customer = new Customer();
 
-      if(this.Creado == true){
-
-        this.ingredients = this.data.ingredients;
-      this.form=this.fb.group({
-      productName: new FormControl(this.product.productName),
-      productPrice:  new FormControl(this.data.productPrice),
-      stock:  new FormControl(this.data.stock),
-      sellDay:  new FormControl(this.data.sellday),
-      category:new FormControl(this.data.category.id)
-    });
-
+    this.customer.id = this.data.id;
+    this.order.costumer = this.customer;
   }
-    else {
-      this.ingredients = new Array<string>();
 
-      this.form=this.fb.group({
-        productName: new FormControl(''),
-        productPrice:  new FormControl(''),
-        stock:  new FormControl(''),
-        sellDay:  new FormControl(''),
-        category:new FormControl('')
+  register() {
+    this.order.orderDetails = this.orderDetails;
+
+    this.orderService.registerOrder(this.order).subscribe(data => {
+      this.orderService.getAllOrders().subscribe(orders => {
+        this.orderService.ordersChange.next(orders);
+        this.orderService.message.next("Se registro");
       });
-    }
-  }
-      registerOrUpdate() {
-        let productCategory = new ProductCategory();
-        productCategory.id =  this.form.value['category'];
-        this.product.productName = this.form.value['productName'];
-        this.product.stock = this.form.value['stock'];
-        this.product.productPrice= this.form.value['productPrice'];
-        this.product.sellday = this.form.value['sellDay'];
-        this.product.category =productCategory;
-        this.product.imageUrl = "test";
-        this.product.ingredients = this.ingredients;
-
-        if(this.Creado == false){
-          this.product.id = null;
-        this.productService.registerProduct(this.product).subscribe(
-          ()=>{
-            this.dialogRef.close();
-            console.log("Creado");
-          }
-        );}
-        else{
-          this.productService.updateProduct(this.product.id,this.product).subscribe(
-            ()=>{
-              this.dialogRef.close();
-              console.log("updated");
-            }
-          )
-        }
-        
-  }
-  AddIngredients(newIngredient:string){
-    this.ingredients.push(newIngredient);
-  }
-  DeleteLastIngredient(){
-    this.ingredients.pop();
+    });
+    this.dialogRef.close();
   }
 
+  close() {
+    this.dialogRef.close();
+  }
+
+  AddOrderDetail(productId: number, quantity: number) {
+    let _product = new Product();
+    _product.id = productId;
+
+    let _orderDetail = new OrderDetail();
+    _orderDetail.product = _product;
+    _orderDetail.quantity = quantity;
+
+    this.orderDetails.push(_orderDetail);
+  }
+
+  DeleteLastOrderDetial() {
+    this.orderDetails.pop();
+  }
 }

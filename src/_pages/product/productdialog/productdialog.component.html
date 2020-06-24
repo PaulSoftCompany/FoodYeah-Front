@@ -1,4 +1,3 @@
-
 <form [formGroup]="form" (ngSubmit)="registerOrUpdate()">
     <mat-tab-group>
         <mat-tab label="Producto">
@@ -12,40 +11,41 @@
             </mat-form-field>
 
             <mat-form-field>
-                <input matInput type="number" placeholder="Stock" formControlName="stock"
-                    [formGroup]="form" required>
+                <input matInput type="number" placeholder="Stock" formControlName="stock" [formGroup]="form" required>
             </mat-form-field>
 
             <mat-form-field>
-                <input matInput type="number" placeholder="Dia de venta" formControlName="sellDay"
-                    [formGroup]="form" required>
+                <input matInput type="number" placeholder="Dia de venta" formControlName="sellDay" [formGroup]="form"
+                    required>
             </mat-form-field>
 
             <mat-form-field>
-                <input matInput type="number" placeholder="Categoria" formControlName="category"
-                    [formGroup]="form" required>
+                <input matInput type="number" placeholder="Categoria" formControlName="category" [formGroup]="form"
+                    required>
             </mat-form-field>
 
             <mat-form-field>
-                <input matInput placeholder="Ingredientes"  #newProduct>
+                <input matInput placeholder="Ingredientes" #newProduct>
             </mat-form-field>
 
-           <br>
+            <br>
             <P> Ingredientes </P>
             <li *ngFor="let ingredient of ingredients">
                 {{ ingredient }}
-              </li>
-              <button mat-button type='button' color="warn" (click)="AddIngredients(newProduct.value)"> Agregar Ingredientes
+            </li>
+            <button mat-button type='button' color="warn" (click)="AddIngredients(newProduct.value)"> Agregar
+                Ingredientes
                 <mat-icon>add</mat-icon>
-              </button>
-              <button mat-button type='button' color="warn" (click)="DeleteLastIngredient()"> Borrar Ingredientes
+            </button>
+            <button mat-button type='button' color="warn" (click)="DeleteLastIngredient()"> Borrar Ingredientes
                 <mat-icon>delete</mat-icon>
-              </button>
-          <br>
+            </button>
+            <br>
 
-            
-          <br>
+
+            <br>
             <button mat-raised-button color="primary" type="submit">Registrar</button>
+            <button mat-raised-button color="accent" (click)="close()">Cancelar</button>
             <br>
         </mat-tab>
     </mat-tab-group>

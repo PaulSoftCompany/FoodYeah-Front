@@ -1,8 +1,13 @@
 import { Customer } from './customer';
-import { OrderDetails } from './orderDetails';
+import { OrderDetail } from './orderDetail';
+import { MatTableDataSource } from '@angular/material/table';
 
 export class Order {
     id:number;
-    orderDetails:OrderDetails;
-    customer:Customer;
+    orderDetails?: OrderDetail[] | MatTableDataSource<OrderDetail>;
+    costumer:Customer;
+    inittime:string;
+    endtime:string;
+    totalPrice:number;
+    state:string;
 }
