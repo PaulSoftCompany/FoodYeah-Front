@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { environment } from 'src/environments/environment';
-
+import { JwtHelperService } from '@auth0/angular-jwt';
 import { LoginService } from 'src/_service/login.service';
 
 @Component({
@@ -25,16 +25,16 @@ export class LoginComponent implements OnInit {
     this.loginService.login(this.username, this.password).subscribe(data => {
       if (data) {
         //
-        //const helper = new JwtHelperService();
+        const helper = new JwtHelperService();
 
         let token = JSON.stringify(data);
         sessionStorage.setItem(environment.TOKEN_NAME, token);
 
-        //let tk = JSON.parse(sessionStorage.getItem(environment.TOKEN_NAME));
+        let tk = JSON.parse(sessionStorage.getItem(environment.TOKEN_NAME));
         //https://www.npmjs.com/package/@auth0/angular-jwt
-        //const decodedToken = helper.decodeToken(tk.access_token);
-
-
+        const decodedToken = helper.decodeToken(tk.access_token);
+        
+        console.log(decodedToken);
         this.router.navigate(['home']);
 
       }

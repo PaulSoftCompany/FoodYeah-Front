@@ -46,4 +46,19 @@ export class ProductService {
       headers: new HttpHeaders().set('Authorization', `bearer ${access_token}`).set('Content-Type', 'application/json')
     });
   }
+
+  getMenuDelDia(dia:number){
+    let access_token = JSON.parse(sessionStorage.getItem(environment.TOKEN_NAME)).access_token;
+    return this.http.get(`${this.url}/day/${dia}`,{
+      headers: new HttpHeaders().set('Authorization', `bearer ${access_token}`).set('Content-Type', 'application/json')
+  });
+}
+
+getPlatoCarta(){
+  let access_token = JSON.parse(sessionStorage.getItem(environment.TOKEN_NAME)).access_token;
+  return this.http.get(`${this.url}/category/1`,{
+    headers: new HttpHeaders().set('Authorization', `bearer ${access_token}`).set('Content-Type', 'application/json')
+});
+}
+
 }

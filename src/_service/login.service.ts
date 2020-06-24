@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { JwtHelperService } from '@auth0/angular-jwt';
 
 @Injectable({
   providedIn: 'root'
@@ -24,10 +25,17 @@ export class LoginService {
     });
 
   }
-
   isLogged() {
     let token = sessionStorage.getItem(environment.TOKEN_NAME);
     return token != null;
+  }
+
+  getUser(){
+            const helper = new JwtHelperService();  
+     let tk = JSON.parse(sessionStorage.getItem(environment.TOKEN_NAME));
+        const decodedToken = helper.decodeToken(tk.access_token);
+        let user = decodedToken.authorities[0];
+        return user;
   }
 
   signOut() {

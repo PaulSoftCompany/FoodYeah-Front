@@ -5,7 +5,7 @@
       <mat-icon *ngIf="sidenav.opened">close</mat-icon>
     </button>
 
-    <h1 class="example-app-name">FoodYeah</h1>
+    <h1 routerLink="/home" class="example-app-name">FoodYeah</h1>
 
     <span class="example-spacer"></span>
 
@@ -25,24 +25,10 @@
     </mat-menu>
   </mat-toolbar>
 
-  <mat-sidenav-container class="example-sidenav-container">
+   <mat-sidenav-container class="example-sidenav-container">
     <mat-sidenav #sidenav mode="side" style="width: 200px">
-
-      <button mat-menu-item (click)="sidenav.toggle()" routerLink="/persons" style="cursor: pointer">
-        <mat-icon>accessibility</mat-icon>
-        <span>Productos</span>
-      </button>
-      <mat-divider></mat-divider>
-      <button mat-menu-item (click)="sidenav.toggle()" routerLink="/outcomes" style="cursor: pointer">
-        <mat-icon>accessibility</mat-icon>
-        <span>Ahorro</span>
-      </button>
-      <mat-divider></mat-divider>
-      <button mat-menu-item (click)="sidenav.toggle()" routerLink="/reporte" style="cursor: pointer">
-        <mat-icon>assessment</mat-icon>
-        <span>Reportes</span>
-      </button>
-    </mat-sidenav>
+    </mat-sidenav>  
+ 
 
     <mat-sidenav-content>
       <router-outlet></router-outlet>

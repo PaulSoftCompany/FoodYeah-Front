@@ -7,8 +7,8 @@ import { Product } from 'src/_model/product';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { ProductdialogComponent } from './productdialog/productdialog.component';
-import { filter, map } from 'rxjs/operators';
-import { trigger, state, style, animate, transition } from '@angular/animations';
+import { JwtHelperService } from '@auth0/angular-jwt';
+import { LoginService } from 'src/_service/login.service';
 
 
 @Component({
@@ -18,7 +18,7 @@ import { trigger, state, style, animate, transition } from '@angular/animations'
   
 })
 export class ProductComponent implements OnInit {
-
+  User:string;
   products: Array<Product>;
   dataSource: MatTableDataSource<Product>;
   displayedColumns: string[] = ['nombre','precio','stock', 'categoria','state','acciones'];
@@ -26,9 +26,11 @@ export class ProductComponent implements OnInit {
   @ViewChild(MatSort, { static: false }) sort: MatSort;
 
   constructor(private productService:ProductService, private dialog:MatDialog,
-    private snackBar:MatSnackBar) { }
+    private snackBar:MatSnackBar, private loginService:LoginService) { }
 
   ngOnInit() {
+    this.User= this.loginService.getUser();
+
     this.productService.productsChange.subscribe(data => {
       this.dataSource = new MatTableDataSource<Product>(data);
       this.dataSource.paginator = this.paginator;
@@ -45,6 +47,11 @@ export class ProductComponent implements OnInit {
       this.dataSource.sort = this.sort;
       this.products = data;
     });
+
+    
+
+
+
   }
 
 applyFilter(filterValue: string) {
@@ -59,7 +66,7 @@ openDialog(product?: Product) {
   let productdialog = product != null ? product : new Product();
   this.dialog.open(ProductdialogComponent, {
     width: '250px',
-    disableClose: true,
+    disableClose: false,
     data: productdialog
   })
 }

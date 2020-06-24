@@ -16,6 +16,7 @@ import { MatTableModule } from '@angular/material/table';
 import { OrderdialogComponent } from 'src/_pages/order/orderdialog/orderdialog.component';
 import { OrderComponent } from 'src/_pages/order/order.component';
 import { ProductlistComponent } from 'src/_pages/product/productlist/productlist.component';
+import { FlexLayoutModule } from '@angular/flex-layout';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,8 @@ import { ProductlistComponent } from 'src/_pages/product/productlist/productlist
     FormsModule,
     ReactiveFormsModule,
     MatCardModule,
-    MatTableModule
+    MatTableModule,
+    FlexLayoutModule
   ],
   providers: [],
   bootstrap: [AppComponent]

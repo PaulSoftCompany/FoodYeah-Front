@@ -78,7 +78,7 @@ export class OrderComponent {
     let orderdialog = new Order();
     this.dialog.open(OrderdialogComponent, {
       width: '250px',
-      disableClose: true,
+      disableClose: false,
       data: orderdialog
     })
   }

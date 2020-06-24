@@ -1,13 +1,14 @@
-<div fxLayout='row' fxLayoutWrap class="cards">
-  <div fxFlex="20" class="example-card">
-<mat-card *ngFor="let product of products" style="margin-top:10px;"  class="example-card">
-    <mat-card-header>
-      <mat-card-title>{{product.productName}}</mat-card-title>
+
+<h1 style="font-weight: bold;">Menu del dia</h1>
+<div fxLayout="row wrap">
+  <mat-card *ngFor="let product of (menudeldia | slice:menudeldia.length -3 );" class="example-card">
+    <mat-card-header  >
+      <mat-card-title  >{{product.productName}}</mat-card-title>
       <mat-card-subtitle>{{product.category.productCategoryName}}
       </mat-card-subtitle>
     </mat-card-header>
     <img mat-card-image src="{{product.imageUrl}}" >
-    <mat-card-content>
+    <mat-card-content   > 
         <div>
            <h3 style="font-weight:bold">Precio</h3>
             <p>S/. {{product.productPrice}} </p>
@@ -21,14 +22,63 @@
               </li>
         </div>
     </mat-card-content>
-    <mat-card-actions>
-      <button mat-button>
+    <mat-card-actions   >
+      <button mat-button >
         <mat-icon>
             add_shopping_cart
         </mat-icon>  
-        
         Comprar</button>
     </mat-card-actions>
   </mat-card>
-  </div>
+  <button mat-button style="float:right;" >
+    <mat-icon>
+        add_shopping_cart
+    </mat-icon>  
+    Ver mas</button>
 </div>
+<h1 style="font-weight: bold;">Platos a la carta</h1>
+<div fxLayout="row wrap">
+<mat-card *ngFor="let product of (products | slice:products.length - 3);" >
+    <mat-card-header  >
+      <mat-card-title  >{{product.productName}}</mat-card-title>
+      <mat-card-subtitle>{{product.category.productCategoryName}}
+      </mat-card-subtitle>
+    </mat-card-header>
+    <img mat-card-image src="{{product.imageUrl}}" >
+    <mat-card-content   > 
+        <div>
+           <h3 style="font-weight:bold">Precio</h3>
+            <p>S/. {{product.productPrice}} </p>
+
+            <h3 style="font-weight:bold">Stock</h3>
+            <p>{{product.stock}} </p>
+        
+            <h3 style="font-weight:bold">Ingredientes</h3>
+            <li *ngFor="let ingredient of product.ingredients">
+                {{ ingredient }}
+              </li>
+        </div>
+    </mat-card-content>
+    <mat-card-actions   >
+      <button mat-button >
+        <mat-icon>
+            add_shopping_cart
+        </mat-icon>  
+        Comprar</button>
+    </mat-card-actions>
+  </mat-card>
+
+  <button mat-button >
+    <mat-icon>
+        add_shopping_cart
+    </mat-icon>  
+    Ver mas</button>
+
+</div>
+
+
+
+  
+
+
+
