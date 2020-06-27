@@ -1,7 +1,7 @@
 
 <div class="register">
     <form class="custom-form" >
-      <h1>Register</h1>
+      <h1>Crear cuenta</h1>
 
       <input
       [(ngModel)]="nombre"
@@ -38,6 +38,9 @@
         placeholder="Repita la contraseña"
         required="required"
       />
-      <button type="submit" (click)="registerUser()">Register</button>
+      <button type="submit" (click)="registerUser()">Registrarse</button>
+      <br>
+      <button type="button" routerLink="/login" >Regresar al login</button>
+
     </form>
   </div>
