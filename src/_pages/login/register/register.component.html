@@ -1,32 +1,43 @@
 
-<form [formGroup]="form" (ngSubmit)="registerUser()">
-    <mat-tab-group>
-        <mat-tab label="Datos del usuario">
+<div class="register">
+    <form class="custom-form" >
+      <h1>Register</h1>
 
-            <mat-form-field>
-                <input matInput placeholder="Nombre" formControlName="firstName">
-            </mat-form-field>
+      <input
+      [(ngModel)]="nombre"
+      placeholder="Nombre"
+      required="required"
+      name="nombre"
+    />
 
-            <mat-form-field>
-                <input matInput placeholder="Codigo institucional" formControlName="username">
-            </mat-form-field>
+    <input
+    [(ngModel)]="edad"
+    placeholder="Edad"
+    required="required"
+    type="number"
+    name="edad"
+  />
 
-            <mat-form-field>
-                <input matInput type="number" placeholder="Edad" formControlName="age"
-                    [formGroup]="form" required>
-            </mat-form-field>
-
-            <mat-form-field>
-                <input matInput type="password" name="password" placeholder="Contraseña" formControlName="password"
-                    [formGroup]="form" required>
-            </mat-form-field>
-
-            <mat-form-field>
-                <input matInput type="password" placeholder="Repetir contraseña" formControlName="confirmPassword"
-                    [formGroup]="form" required>
-            </mat-form-field>
-
-            <button mat-raised-button color="primary" type="submit">Registrar</button>
-        </mat-tab>
-    </mat-tab-group>
-</form>
+      <input
+      name="usuario"
+        [(ngModel)]="usuario"
+        placeholder="Codigo institucional"
+        required="required"
+      />
+      <input
+        type="password"
+        [(ngModel)]="password"
+        name="password"
+        placeholder="Contraseña"
+        required="required"
+      />
+      <input
+        type="password"
+        [(ngModel)]="confirmPassword"
+        name="password"
+        placeholder="Repita la contraseña"
+        required="required"
+      />
+      <button type="submit" (click)="registerUser()">Register</button>
+    </form>
+  </div>

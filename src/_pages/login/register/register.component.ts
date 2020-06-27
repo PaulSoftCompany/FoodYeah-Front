@@ -24,6 +24,11 @@ export class RegisterComponent implements OnInit {
 
   form:FormGroup;
   maxDate:Date;
+  usuario:string;
+  password:string;
+  nombre:string;
+  edad:number;
+  confirmPassword:string;
   customer:Customer;
 
   constructor(private registerService: RegisterService
@@ -32,33 +37,25 @@ export class RegisterComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.maxDate = new Date();
-
-    this.form = this.fb.group({
-      firstName: new FormControl(''),
-      age: new FormControl(''),
-      username: new FormControl(''),
-      password: [''],
-      confirmPassword: [''],
-    
-    }, {
-      validator: PasswordValidation.MatchPassword
-    });
+ 
+ 
   }
+  
   registerUser(){
-      let customerUsername = this.form.value['username'];
+    let customerNew= new Customer();
 
+    if(this.confirmPassword === this.password)
+    customerNew.password = this.password;
+
+      customerNew.customerAge = this.edad;
+      customerNew.customerName= this.nombre;
+      customerNew.username = this.usuario;
       let customerCategory = new CustomerCategory();
-      customerCategory.id = customerUsername[0] === 'u' ? 1 : 2;
+      customerCategory.id =  customerNew.username [0] === 'u' ? 1 : 2;
+      customerNew.customerCategory = customerCategory;
+      
 
-      this.customer = new Customer();
-      this.customer.customerAge=this.form.value['age'];
-      this.customer.customerName = this.form.value['firstName'];
-      this.customer.username = customerUsername;
-      this.customer.password = this.form.value['password'];
-      this.customer.customerCategory = customerCategory
-
-      this.registerService.register(this.customer).subscribe(()=>{
+      this.registerService.register(customerNew).subscribe(()=>{
         this.matSnackBar.open('Se creó exitosamente','INFO',{
           duration:2000
         });
