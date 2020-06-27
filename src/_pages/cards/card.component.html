@@ -1,4 +1,4 @@
-<mat-toolbar>Cardos</mat-toolbar>
+<mat-toolbar>Cards</mat-toolbar>
 
 <div class="example-container mat-elevation-z8">
 
@@ -16,7 +16,7 @@
         </ng-container>
         <ng-container matColumnDef="cardNumber">
             <mat-header-cell *matHeaderCellDef mat-sort-header> cardNumber </mat-header-cell>
-            <mat-cell *matCellDef="let row"> {{row.cardNumber}} S/.</mat-cell>
+            <mat-cell *matCellDef="let row"> {{row.cardNumber}}</mat-cell>
         </ng-container>
         <ng-container matColumnDef="cardCvi">
             <mat-header-cell *matHeaderCellDef mat-sort-header> cardCvi </mat-header-cell>
@@ -37,7 +37,6 @@
         <ng-container matColumnDef="actions">
             <mat-header-cell *matHeaderCellDef>actions</mat-header-cell>
             <mat-cell *matCellDef="let row">
-                <button mat-button color="primary"  (click)="openDialog(row)" >Actualizar</button>
                 <button mat-button color="accent" (click)="delete(row)">Eliminar</button>
             </mat-cell>
         </ng-container>

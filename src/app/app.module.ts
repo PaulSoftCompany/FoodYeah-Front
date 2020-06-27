@@ -18,6 +18,9 @@ import { OrderComponent } from 'src/_pages/order/order.component';
 import { ProductlistComponent } from 'src/_pages/product/productlist/productlist.component';
 import { CardComponent } from 'src/_pages/cards/card.component';
 import { CarddialogComponent } from 'src/_pages/cards/carddialog/carddialog.component';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
 
 @NgModule({
   declarations: [
@@ -41,7 +44,10 @@ import { CarddialogComponent } from 'src/_pages/cards/carddialog/carddialog.comp
     FormsModule,
     ReactiveFormsModule,
     MatCardModule,
-    MatTableModule
+    MatTableModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatAutocompleteModule
   ],
   providers: [],
   bootstrap: [AppComponent]

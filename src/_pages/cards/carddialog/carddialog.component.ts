@@ -1,6 +1,7 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
+
 import { Card } from 'src/_model/card';
 import { CardService } from 'src/_service/card.service';
 import { FormGroup, FormBuilder, FormControl } from '@angular/forms';
@@ -9,6 +10,7 @@ import { CustomerCategory } from 'src/_model/customerCategory';
 import { VirtualTimeScheduler } from 'rxjs';
 import { promise } from 'protractor';
 import { Customer } from 'src/_model/customer';
+import { CustomerService } from 'src/_service/customer.service';
 
 
 @Component({
@@ -18,14 +20,13 @@ import { Customer } from 'src/_model/customer';
 })
 export class CarddialogComponent implements OnInit {
 
-  opciones: Array<CardCategory>;
+  customers: Array<Customer>
   form: FormGroup;
   card: Card;
-  ingredients: Array<string>;
-  created: Boolean;
-  constructor(private cardService: CardService, private fb: FormBuilder, @Inject(MAT_DIALOG_DATA) public data: Card,
-    private router: Router, private dialogRef: MatDialogRef<CarddialogComponent>, private cardcategoryService: CardCategoryService) {
-    this.ingredients = new Array<string>();
+  constructor(private cardService: CardService, private customerService: CustomerService, private fb: FormBuilder,
+    @Inject(MAT_DIALOG_DATA) public data: Card,
+    private router: Router, private dialogRef: MatDialogRef<CarddialogComponent>) {
+
   }
 
   ngOnInit() {
@@ -37,78 +38,45 @@ export class CarddialogComponent implements OnInit {
     this.card.cardExpireDate = this.data.cardExpireDate;
     this.card.cardMoney = this.data.cardMoney;
     this.card.state = this.data.state;
+    this.card.customer = this.data.customer;
 
-    let _customer = new Customer();
-    _customer.id = this.data.customer.id;
-    this.card.customer = _customer;
+    this.customerService.getAllCustomers().subscribe(
+      data => { this.customers = data });
 
-    this.created = new Boolean();
-    this.created = false;
-    if (this.card != null && this.card.id > 0) {
-      this.created = true;
-    }
-
-    if (this.created == true) {
-      this.form = this.fb.group({
-        cardNumber: new FormControl(this.card.cardNumber),
-        cardType: new FormControl(this.data.cardType),
-        cardCvi: new FormControl(this.data.cardCvi),
-        cardExpireDate: new FormControl(this.data.cardExpireDate),
-        cardMoney: new FormControl(this.data.cardMoney),
-        customerId: new FormControl(this.data.customer.id)
-      });
-
-    }
-    else {
-      this.ingredients = new Array<string>();
-
-      this.form = this.fb.group({
-        cardName: new FormControl(''),
-        cardPrice: new FormControl(''),
-        stock: new FormControl(''),
-        sellDay: new FormControl(''),
-        category: new FormControl(''),
-        imageUrl: new FormControl('')
-      });
-    }
+    this.form = this.fb.group({
+      cardNumber: new FormControl(''),
+      cardType: new FormControl(''),
+      cardCvi: new FormControl(''),
+      cardExpireDate: new FormControl(''),
+      cardMoney: new FormControl(''),
+      customer: new FormControl('')
+    });
   }
-  registerOrUpdate() {
-    let cardCategory = new CardCategory();
-    cardCategory = this.form.value['category'];
-    console.log(cardCategory.cardCategoryName);
-    this.card.cardName = this.form.value['cardName'];
-    this.card.stock = this.form.value['stock'];
-    this.card.cardPrice = this.form.value['cardPrice'];
-    this.card.sellday = this.form.value['sellDay'];
-    this.card.category = cardCategory;
-    this.card.imageUrl = this.form.value['imageUrl'];
-    this.card.ingredients = this.ingredients;
+  register() {
+    let cardCustomer = new Customer();
+    cardCustomer = this.form.value['customer'];
+    console.log(cardCustomer);
+    this.card.cardNumber = this.form.value['cardNumber'];
+    this.card.cardType = this.form.value['cardType'];
+    this.card.cardCvi = this.form.value['cardCvi'];
+    this.card.cardExpireDate = this.form.value['cardExpireDate'];
+    this.card.cardMoney = this.form.value['cardMoney'];
+    this.card.customer = cardCustomer;
 
-    if (this.created == false) {
-      this.card.id = null;
-      this.cardService.registerCard(this.card).subscribe(data => {
-        this.cardService.getAllCards().subscribe(savings => {
-          this.cardService.cardsChange.next(savings);
-          this.cardService.message.next("Se registro");
-        });
+    this.card.id = null;
+    this.cardService.registerCard(this.card).subscribe(data => {
+      this.cardService.getAllCards().subscribe(savings => {
+        this.cardService.cardsChange.next(savings);
+        this.cardService.message.next("Se registro");
       });
-    }
-    else {
-      this.cardService.updateCard(this.card.id, this.card).subscribe(data => {
-        this.cardService.getAllCards().subscribe(savings => {
-          this.cardService.cardsChange.next(savings);
-          this.cardService.message.next("Se actualizo");
-        });
-      });
-    }
+    });
     this.dialogRef.close();
   }
-  AddIngredients(newIngredient: string) {
-    this.ingredients.push(newIngredient);
+
+  displayFn(customer: Customer): string {
+    return customer && customer.username ? customer.username : '';
   }
-  DeleteLastIngredient() {
-    this.ingredients.pop();
-  }
+
   close() {
     this.dialogRef.close();
   }

@@ -23,16 +23,6 @@ export class CardComponent implements OnInit {
   cards: Array<Card>;
   dataSource: MatTableDataSource<Card>;
 
-	id: number;
-	cardNumber: number;
-	cardType: boolean;
-	cardCvi: number;
-	cardExpireDate: string;
-	customer: Customer;
-	cardMoney: number
-	state: string;
-
-
   displayedColumns: string[] = ['id','cardNumber', 'cardCvi','cardOwnerName', 'cardMoney', 'state', 'actions'];
   @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator;
   @ViewChild(MatSort, { static: false }) sort: MatSort;
@@ -65,10 +55,10 @@ applyFilter(filterValue: string) {
   this.dataSource.filter = filterValue;
 }
 
-openDialog(card?: Card) {
-  let carddialog = card != null ? card : new Card();
+openDialog() {
+  let carddialog = new Card();
   this.dialog.open(CarddialogComponent, {
-    width: '250px',
+    width: '300px',
     disableClose: true,
     data: carddialog
   })
