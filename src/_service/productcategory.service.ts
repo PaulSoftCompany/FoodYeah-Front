@@ -25,21 +25,21 @@ export class ProductCategoryService {
     });
   }
 
-  registerProduct(products: Product) {
+  registerProductCategory(products: ProductCategory) {
     let access_token = JSON.parse(sessionStorage.getItem(environment.TOKEN_NAME)).access_token;
     return this.http.post(this.url, products, {
       headers: new HttpHeaders().set('Authorization', `bearer ${access_token}`).set('Content-Type', 'application/json')
     });
   }
 
-  updateProduct(productsId: number, products: Product) {
+  updateProductCategory(productsId: number, products: ProductCategory) {
     let access_token = JSON.parse(sessionStorage.getItem(environment.TOKEN_NAME)).access_token;
     return this.http.put(`${this.url}/${productsId}`, products, {
       headers: new HttpHeaders().set('Authorization', `bearer ${access_token}`).set('Content-Type', 'application/json')
     });
   }
 
-  deleteProduct(productsId: number) {
+  deleteProductCategory(productsId: number) {
     let access_token = JSON.parse(sessionStorage.getItem(environment.TOKEN_NAME)).access_token;
     return this.http.delete(`${this.url}/${productsId}`, {
       headers: new HttpHeaders().set('Authorization', `bearer ${access_token}`).set('Content-Type', 'application/json')

@@ -56,7 +56,7 @@ export class ProductdialogComponent implements OnInit {
     if (this.Creado == true) {
       this.ingredients = this.data.ingredients;
       this.form = this.fb.group({
-        productName: new FormControl(this.product.productName),
+        productName: new FormControl(this.data.productName),
         productPrice: new FormControl(this.data.productPrice),
         stock: new FormControl(this.data.stock),
         sellDay: new FormControl(this.data.sellday),

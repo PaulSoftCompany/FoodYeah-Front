@@ -32,3 +32,22 @@
     </button>
     </mat-card-actions>
 </mat-card>
+
+
+<mat-card class="example-card" *ngIf="User != 'USER'">
+  <mat-card-header>
+    <mat-card-title>Categoria de productos</mat-card-title>
+    <mat-card-subtitle> Categorias de tus diferentes productos </mat-card-subtitle>
+  </mat-card-header>
+  <img id="imagencarrito" mat-card-image src="https://images-na.ssl-images-amazon.com/images/I/613NI2n6vaL._AC_SX522_.jpg" alt="Categoria">
+  <mat-card-content>
+    <p>
+      Administra las categorias de tus productos
+    </p>
+  </mat-card-content>
+  <mat-card-actions>
+    <button mat-button color="warn" routerLink="/product_categories" >
+      Ver mas
+  </button>
+  </mat-card-actions>
+</mat-card>

@@ -17,6 +17,8 @@ import { OrderdialogComponent } from 'src/_pages/order/orderdialog/orderdialog.c
 import { OrderComponent } from 'src/_pages/order/order.component';
 import { ProductlistComponent } from 'src/_pages/product/productlist/productlist.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { ProductcategoryComponent } from 'src/_pages/productcategory/productcategory.component';
+import { CategorydialogComponent } from 'src/_pages/productcategory/categorydialog/categorydialog.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +30,9 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     ProductdialogComponent,
     OrderComponent,
     OrderdialogComponent,
-    ProductlistComponent
+    ProductlistComponent,
+    ProductcategoryComponent,
+    CategorydialogComponent
   ],
   imports: [
     BrowserModule,
