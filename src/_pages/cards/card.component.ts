@@ -55,8 +55,8 @@ applyFilter(filterValue: string) {
   this.dataSource.filter = filterValue;
 }
 
-openDialog() {
-  let carddialog = new Card();
+openDialog(card?: Card) {
+  let carddialog = card != null ? card : new Card();
   this.dialog.open(CarddialogComponent, {
     width: '300px',
     disableClose: true,

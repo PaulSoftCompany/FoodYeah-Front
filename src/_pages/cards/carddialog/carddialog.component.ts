@@ -20,13 +20,14 @@ import { CustomerService } from 'src/_service/customer.service';
 })
 export class CarddialogComponent implements OnInit {
 
-  customers: Array<Customer>
+  customers:Array<Customer>
   form: FormGroup;
   card: Card;
-  constructor(private cardService: CardService, private customerService: CustomerService, private fb: FormBuilder,
-    @Inject(MAT_DIALOG_DATA) public data: Card,
+  created: Boolean;
+  constructor(private cardService: CardService, private customerService: CustomerService,private fb: FormBuilder,
+     @Inject(MAT_DIALOG_DATA) public data: Card,
     private router: Router, private dialogRef: MatDialogRef<CarddialogComponent>) {
-
+  
   }
 
   ngOnInit() {
@@ -43,19 +44,38 @@ export class CarddialogComponent implements OnInit {
     this.customerService.getAllCustomers().subscribe(
       data => { this.customers = data });
 
-    this.form = this.fb.group({
-      cardNumber: new FormControl(''),
-      cardType: new FormControl(''),
-      cardCvi: new FormControl(''),
-      cardExpireDate: new FormControl(''),
-      cardMoney: new FormControl(''),
-      customer: new FormControl('')
-    });
+    this.created = new Boolean();
+    this.created = false;
+    if (this.card != null && this.card.id > 0) {
+      this.created = true;
+    }
+
+    if (this.created == true) {
+      this.form = this.fb.group({
+        cardNumber: new FormControl(this.card.cardNumber),
+        cardType: new FormControl(this.data.cardType),
+        cardCvi: new FormControl(this.data.cardCvi),
+        cardExpireDate: new FormControl(this.data.cardExpireDate),
+        cardMoney: new FormControl(this.data.cardMoney),
+        customer: new FormControl(this.data.customer.id)
+      });
+
+    }
+    else {
+      this.form = this.fb.group({
+        cardNumber: new FormControl(''),
+        cardType: new FormControl(''),
+        cardCvi: new FormControl(''),
+        cardExpireDate: new FormControl(''),
+        cardMoney: new FormControl(''),
+        customer: new FormControl('')
+      });
+    }
   }
-  register() {
+  registerOrUpdate() {
     let cardCustomer = new Customer();
     cardCustomer = this.form.value['customer'];
-    console.log(cardCustomer);
+console.log(cardCustomer);
     this.card.cardNumber = this.form.value['cardNumber'];
     this.card.cardType = this.form.value['cardType'];
     this.card.cardCvi = this.form.value['cardCvi'];
@@ -63,13 +83,23 @@ export class CarddialogComponent implements OnInit {
     this.card.cardMoney = this.form.value['cardMoney'];
     this.card.customer = cardCustomer;
 
-    this.card.id = null;
-    this.cardService.registerCard(this.card).subscribe(data => {
-      this.cardService.getAllCards().subscribe(savings => {
-        this.cardService.cardsChange.next(savings);
-        this.cardService.message.next("Se registro");
+    if (this.created == false) {
+      this.card.id = null;
+      this.cardService.registerCard(this.card).subscribe(data => {
+        this.cardService.getAllCards().subscribe(savings => {
+          this.cardService.cardsChange.next(savings);
+          this.cardService.message.next("Se registro");
+        });
       });
-    });
+    }
+    else {
+      this.cardService.updateCard(this.card.id, this.card).subscribe(data => {
+        this.cardService.getAllCards().subscribe(savings => {
+          this.cardService.cardsChange.next(savings);
+          this.cardService.message.next("Se actualizo");
+        });
+      });
+    }
     this.dialogRef.close();
   }
 
