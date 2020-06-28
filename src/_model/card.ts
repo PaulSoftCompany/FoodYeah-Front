@@ -7,6 +7,7 @@ export class Card {
 	cardCvi: number;
 	cardExpireDate: string;
 	customer: Customer;
+	cardOwnerName:string;
 	cardMoney: number
 	state: string;
 }

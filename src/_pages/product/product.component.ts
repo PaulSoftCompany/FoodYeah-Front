@@ -21,6 +21,7 @@ export class ProductComponent implements OnInit {
   User:string;
   products: Array<Product>;
   dataSource: MatTableDataSource<Product>;
+  
   displayedColumns: string[] = ['nombre','precio','stock', 'categoria','state','acciones'];
   @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator;
   @ViewChild(MatSort, { static: false }) sort: MatSort;

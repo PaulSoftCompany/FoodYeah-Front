@@ -23,7 +23,7 @@ export class ProductdialogComponent implements OnInit {
   form: FormGroup;
   product: Product;
   ingredients: Array<string>;
-  Creado: Boolean;
+  created: Boolean;
   constructor(private productService: ProductService, private fb: FormBuilder, @Inject(MAT_DIALOG_DATA) public data: Product,
     private router: Router, private dialogRef: MatDialogRef<ProductdialogComponent>, private productcategoryService: ProductCategoryService) {
     this.ingredients = new Array<string>();
@@ -47,13 +47,13 @@ export class ProductdialogComponent implements OnInit {
 
 
 
-    this.Creado = new Boolean();
-    this.Creado = false;
+    this.created = new Boolean();
+    this.created = false;
     if (this.product != null && this.product.id > 0) {
-      this.Creado = true;
+      this.created = true;
     }
 
-    if (this.Creado == true) {
+    if (this.created == true) {
       this.ingredients = this.data.ingredients;
       this.form = this.fb.group({
         productName: new FormControl(this.data.productName),
@@ -90,7 +90,7 @@ export class ProductdialogComponent implements OnInit {
     this.product.imageUrl = this.form.value['imageUrl'];
     this.product.ingredients = this.ingredients;
 
-    if (this.Creado == false) {
+    if (this.created == false) {
       this.product.id = null;
       this.productService.registerProduct(this.product).subscribe(data => {
         this.productService.getAllProducts().subscribe(savings => {

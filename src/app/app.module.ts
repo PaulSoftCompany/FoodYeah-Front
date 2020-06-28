@@ -20,6 +20,14 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { ProductcategoryComponent } from 'src/_pages/productcategory/productcategory.component';
 import { CategorydialogComponent } from 'src/_pages/productcategory/categorydialog/categorydialog.component';
 
+import { CarddialogComponent } from 'src/_pages/cards/carddialog/carddialog.component';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
+import { OrderbuydialogComponent } from 'src/_pages/order/orderbuydialog/orderbuydialog.component';
+import { CardComponent } from 'src/_pages/cards/card.component';
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -32,7 +40,10 @@ import { CategorydialogComponent } from 'src/_pages/productcategory/categorydial
     OrderdialogComponent,
     ProductlistComponent,
     ProductcategoryComponent,
-    CategorydialogComponent
+    CategorydialogComponent,
+    CardComponent,
+    CarddialogComponent,
+    OrderbuydialogComponent
   ],
   imports: [
     BrowserModule,
@@ -43,7 +54,10 @@ import { CategorydialogComponent } from 'src/_pages/productcategory/categorydial
     ReactiveFormsModule,
     MatCardModule,
     MatTableModule,
-    FlexLayoutModule
+    FlexLayoutModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatAutocompleteModule
   ],
   providers: [],
   bootstrap: [AppComponent]

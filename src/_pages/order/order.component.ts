@@ -11,6 +11,7 @@ import { OrderDetail } from 'src/_model/orderDetail';
 import { Customer } from 'src/_model/customer';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatDialog } from '@angular/material/dialog';
+import { OrderbuydialogComponent } from './orderbuydialog/orderbuydialog.component';
 
 
 @Component({
@@ -35,7 +36,7 @@ export class OrderComponent {
 
   dataSource: MatTableDataSource<Order>;
   ordersData: Order[] = [];
-  columnsToDisplay = ['id', 'customer', 'inittime', 'totalPrice', 'state'];
+  columnsToDisplay = ['id', 'customer', 'inittime', 'totalPrice', 'state', 'actions'];
   innerDisplayedColumns = ['id', 'totalPrice'];
   expandedElement: Order | null;
 
@@ -80,6 +81,14 @@ export class OrderComponent {
       width: '250px',
       disableClose: false,
       data: orderdialog
+    })
+  }
+
+  openBuyDialog(orderbuydialog : Order) {
+    this.dialog.open(OrderbuydialogComponent, {
+      width: '250px',
+      disableClose: true,
+      data: orderbuydialog
     })
   }
 }

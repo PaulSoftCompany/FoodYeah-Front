@@ -1,0 +1,53 @@
+<mat-toolbar>Cards</mat-toolbar>
+
+<div class="example-container mat-elevation-z8">
+
+       
+    <div class="example-header">
+        <mat-form-field>
+            <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Buscar Tarjeta">
+        </mat-form-field>
+    </div>
+
+    <mat-table [dataSource]="dataSource" matSort>
+        <ng-container matColumnDef="id" >
+            <mat-header-cell *matHeaderCellDef mat-sort-header> id </mat-header-cell>
+            <mat-cell *matCellDef="let row"> {{row.id}} </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="cardNumber">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> cardNumber </mat-header-cell>
+            <mat-cell *matCellDef="let row"> {{row.cardNumber}}</mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="cardCvi">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> cardCvi </mat-header-cell>
+            <mat-cell *matCellDef="let row"> {{row.cardCvi}} </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="cardOwnerName">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> cardOwnerName </mat-header-cell>
+            <mat-cell *matCellDef="let row"> {{row.cardOwnerName}} </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="cardMoney">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> cardMoney </mat-header-cell>
+            <mat-cell *matCellDef="let row"> {{row.cardMoney}} </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="state">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> state </mat-header-cell>
+            <mat-cell *matCellDef="let row"> {{row.state}} </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="actions">
+            <mat-header-cell *matHeaderCellDef>actions</mat-header-cell>
+            <mat-cell *matCellDef="let row">
+                <button mat-button color="primary"  (click)="openDialog(row)" >Actualizar</button>
+                <button mat-button color="accent" (click)="delete(row)">Eliminar</button>
+            </mat-cell>
+        </ng-container>
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row  *matRowDef="let row; columns: displayedColumns;">
+        </mat-row>
+    </mat-table>
+    <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+</div>
+<br>
+<button mat-fab color="accent" (click)="openDialog()" style="float: right; margin-right: 20px">
+    <mat-icon>create</mat-icon>
+</button>
