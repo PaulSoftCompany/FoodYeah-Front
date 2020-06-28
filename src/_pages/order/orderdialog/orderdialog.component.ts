@@ -7,6 +7,8 @@ import { OrderService } from 'src/_service/order.service';
 import { Product } from 'src/_model/product';
 import { OrderDetail } from 'src/_model/orderDetail';
 import { Customer } from 'src/_model/customer';
+import { ProductService } from 'src/_service/product.service';
+import { CustomerService } from 'src/_service/customer.service';
 
 
 
@@ -19,18 +21,25 @@ import { Customer } from 'src/_model/customer';
 export class OrderdialogComponent implements OnInit {
   customer: Customer;
   order: Order;
+  customers:Array<Customer>;
   orderDetails: Array<OrderDetail>;
-
+  productos: Array<Product>;
+  producto:Product;
   constructor(private orderService: OrderService, @Inject(MAT_DIALOG_DATA) public data: Customer
-    , private dialogRef: MatDialogRef<OrderdialogComponent>) { }
+    , private dialogRef: MatDialogRef<OrderdialogComponent>,private productService:ProductService, private customerService:CustomerService) { }
 
   ngOnInit() {
     this.orderDetails = new Array<OrderDetail>();
     this.order = new Order();
-    this.customer = new Customer();
 
-    this.customer.id = this.data.id;
-    this.order.costumer = this.customer;
+    this.productService.getAllProducts().subscribe(data=>{
+      this.productos = data;
+    });
+    this.customerService.getAllCustomers().subscribe(data=>{
+      this.customers = data;
+    })
+
+    
   }
 
   register() {
@@ -49,12 +58,14 @@ export class OrderdialogComponent implements OnInit {
     this.dialogRef.close();
   }
 
-  AddOrderDetail(productId: number, quantity: number) {
-    let _product = new Product();
-    _product.id = productId;
+  AddOrderDetail(quantity: number) {
+    
 
+    console.log(this.customer.customerName);
+    this.order.costumer = this.customer;
+    
     let _orderDetail = new OrderDetail();
-    _orderDetail.product = _product;
+    _orderDetail.product = this.producto;
     _orderDetail.quantity = quantity;
 
     this.orderDetails.push(_orderDetail);

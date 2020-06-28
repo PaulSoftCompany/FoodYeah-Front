@@ -81,7 +81,6 @@ export class ProductdialogComponent implements OnInit {
   registerOrUpdate() {
     let productCategory = new ProductCategory();
     productCategory = this.form.value['category'];
-    console.log(productCategory.productCategoryName);
     this.product.productName = this.form.value['productName'];
     this.product.stock = this.form.value['stock'];
     this.product.productPrice = this.form.value['productPrice'];

@@ -1,14 +1,25 @@
 <div class="example-container">
     <mat-form-field>
-        <input matInput placeholder="Customer" [(ngModel)]="customer.id">
+        <mat-label>Clientes</mat-label>
+        <mat-select [(ngModel)]="customer" required>
+            <mat-option *ngFor="let opcion of customers" [value]="opcion">
+                {{opcion.customerName}}
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
+
+
+    <mat-form-field>
+        <mat-label>Productos</mat-label>
+        <mat-select [(ngModel)]="producto" required>
+            <mat-option *ngFor="let opcion of productos" [value]="opcion">
+                {{opcion.productName}}
+            </mat-option>
+        </mat-select>
     </mat-form-field>
 
     <mat-form-field>
-        <input matInput placeholder="Product" #product>
-    </mat-form-field>
-
-    <mat-form-field>
-        <input matInput placeholder="Quantity" #quantity>
+        <input matInput type="number" placeholder="Cantidad" #quantity>
     </mat-form-field>
 
     <br>
@@ -25,7 +36,7 @@
     </table>
 
     <br>
-    <button mat-button type='button' color="primary" (click)="AddOrderDetail(product.value, quantity.value)">
+    <button mat-button type='button' color="primary" (click)="AddOrderDetail(quantity.value)">
         Agregar OrderDetail
         <mat-icon>add</mat-icon>
     </button>
@@ -39,3 +50,9 @@
 <button mat-raised-button color="primary" (click)="register()">Registrar</button>
 <button mat-raised-button color="accent" (click)="close()">Cancelar</button>
 <br>
+
+
+
+
+
+
