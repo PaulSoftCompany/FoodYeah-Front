@@ -21,6 +21,8 @@ import { CarddialogComponent } from 'src/_pages/cards/carddialog/carddialog.comp
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
+import { OrderbuydialogComponent } from 'src/_pages/order/orderbuydialog/orderbuydialog.component';
+
 
 @NgModule({
   declarations: [
@@ -34,7 +36,8 @@ import {MatAutocompleteModule} from '@angular/material/autocomplete';
     OrderdialogComponent,
     ProductlistComponent,
     CardComponent,
-    CarddialogComponent
+    CarddialogComponent,
+    OrderbuydialogComponent
   ],
   imports: [
     BrowserModule,

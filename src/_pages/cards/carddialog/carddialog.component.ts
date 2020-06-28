@@ -25,8 +25,7 @@ export class CarddialogComponent implements OnInit {
   card: Card;
   created: Boolean;
   constructor(private cardService: CardService, private customerService: CustomerService,private fb: FormBuilder,
-     @Inject(MAT_DIALOG_DATA) public data: Card,
-    private router: Router, private dialogRef: MatDialogRef<CarddialogComponent>) {
+     @Inject(MAT_DIALOG_DATA) public data: Card, private dialogRef: MatDialogRef<CarddialogComponent>) {
   
   }
 

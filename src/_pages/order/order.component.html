@@ -55,6 +55,13 @@
             </td>
         </ng-container>
 
+        <ng-container matColumnDef="actions">
+            <mat-header-cell *matHeaderCellDef>actions</mat-header-cell>
+            <mat-cell *matCellDef="let row">
+                <button mat-button color="primary"  (click)="openBuyDialog(row)" >Comprar</button>
+            </mat-cell>
+        </ng-container>
+
         <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
         <tr mat-row *matRowDef="let element; columns: columnsToDisplay;" class="example-element-row"
             [class.example-expanded-row]="expandedElement === element" (click)="expandedElement = element">
