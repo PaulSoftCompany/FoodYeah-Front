@@ -1,9 +1,7 @@
 <div class="example-container"> 
   <mat-toolbar color="warn" class="example-toolbar" *ngIf="loginService.isLogged()">
-    <button mat-icon-button (click)="sidenav.toggle()">
-      <mat-icon *ngIf="!sidenav.opened">menu</mat-icon>
-      <mat-icon *ngIf="sidenav.opened">close</mat-icon>
-    </button>
+
+    
 
     <h1 routerLink="/home" class="example-app-name">FoodYeah</h1>
 
