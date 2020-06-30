@@ -3,6 +3,8 @@ import { environment } from 'src/environments/environment';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Order } from 'src/_model/order';
 import { Subject } from 'rxjs';
+import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/filter';
 
 @Injectable({
   providedIn: 'root'
@@ -38,4 +40,14 @@ export class OrderService {
         `bearer ${access_token}`).set('Content-Type', 'application/json')
     });
   }
+  getAllOrdersbyName(){
+    let access_token = JSON.parse(sessionStorage.getItem(environment.TOKEN_NAME)).access_token;
+    return this.http.get<Order[]>(this.url, {
+      headers: new HttpHeaders().set('Authorization',
+        `bearer ${access_token}`).set('Content-Type', 'application/json')
+    }) ;
+  }
+
+
+
 }

@@ -60,7 +60,7 @@
         </div>
     </mat-card-content>
     <mat-card-actions   >
-      <button mat-button >
+      <button mat-button routerLink="/orders"   (click)="openDialog(product)">
         <mat-icon>
             add_shopping_cart
         </mat-icon>  
@@ -68,10 +68,7 @@
     </mat-card-actions>
   </mat-card>
 
-  <button mat-button >
-    <mat-icon>
-        add_shopping_cart
-    </mat-icon>  
+  <button mat-button > 
     Ver mas</button>
 
 </div>

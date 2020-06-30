@@ -59,7 +59,7 @@ openDialog(card?: Card) {
   let carddialog = card != null ? card : new Card();
   this.dialog.open(CarddialogComponent, {
     width: '300px',
-    disableClose: true,
+    disableClose: false,
     data: carddialog
   })
 }

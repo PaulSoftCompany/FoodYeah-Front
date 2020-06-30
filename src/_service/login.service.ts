@@ -38,6 +38,14 @@ export class LoginService {
         return user;
   }
 
+  getUserName(){
+    const helper = new JwtHelperService();  
+let tk = JSON.parse(sessionStorage.getItem(environment.TOKEN_NAME));
+const decodedToken = helper.decodeToken(tk.access_token);
+let username = decodedToken.user_name;
+return username;
+}
+
   signOut() {
     let access_token = JSON.parse(sessionStorage.getItem(environment.TOKEN_NAME)).access_token;
     this.http.get(`${environment.HOST_URL}/tokens/cancel/${access_token}`).subscribe(() => {

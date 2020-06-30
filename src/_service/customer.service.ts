@@ -22,5 +22,15 @@ export class CustomerService {
       headers: new HttpHeaders().set('Authorization',
         `bearer ${access_token}`).set('Content-Type', 'application/json')
     });
-  
-}}
+  }
+
+    getCustomerByUserName(username){
+      let access_token = JSON.parse(sessionStorage.getItem(environment.TOKEN_NAME)).access_token;
+      return this.http.get<Customer>(`${this.url}/user=${username}`, {
+        headers: new HttpHeaders().set('Authorization',
+          `bearer ${access_token}`).set('Content-Type', 'application/json')
+      });
+    
+    }
+
+}
