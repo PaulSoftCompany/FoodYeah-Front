@@ -1,6 +1,9 @@
 <div class="example-container"> 
   <mat-toolbar color="warn" class="example-toolbar" *ngIf="loginService.isLogged()">
-
+    <button mat-icon-button (click)="sidenav.toggle()">
+      <mat-icon *ngIf="!sidenav.opened">menu</mat-icon>
+      <mat-icon *ngIf="sidenav.opened">close</mat-icon>
+    </button>
     
 
     <h1 routerLink="/home" class="example-app-name">FoodYeah</h1>
@@ -12,10 +15,7 @@
     </button>
 
     <mat-menu #menu="matMenu">
-      <button mat-menu-item routerLink="/perfil">
-        <mat-icon>account_box</mat-icon>
-        <span>Mi Perfil</span>
-      </button>
+     
       <button mat-menu-item routerLink="" (click)="sidenav.opened = false" (click)="loginService.signOut()">
         <mat-icon>exit_to_app</mat-icon>
         <span>Cerrar Sesión</span>
@@ -25,6 +25,21 @@
 
    <mat-sidenav-container class="example-sidenav-container">
     <mat-sidenav #sidenav mode="side" style="width: 200px">
+      <button mat-menu-item (click)="sidenav.toggle()" routerLink="/home" style="cursor: pointer">
+        <mat-icon>house</mat-icon>
+        <span>Inicio</span>
+      </button>
+      <mat-divider></mat-divider>
+
+      <button mat-menu-item (click)="sidenav.toggle()" routerLink="/products" style="cursor: pointer">
+        <mat-icon>fastfood</mat-icon>
+        <span>Producto</span>
+      </button>
+      <mat-divider></mat-divider>
+      <button mat-menu-item (click)="sidenav.toggle()" routerLink="/orders" style="cursor: pointer">
+        <mat-icon>add_shopping_cart</mat-icon>
+        <span>Ordenes</span>
+      </button>
     </mat-sidenav>  
  
 

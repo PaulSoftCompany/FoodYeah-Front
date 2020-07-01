@@ -62,11 +62,15 @@ export class OrderbuydialogComponent implements OnInit {
       this.cardService.registerCard(this.tarjetaElejida).subscribe(data=>
         this.orderService.message.next("Tarjeta creada")
         );
-        this.orderService.deliverOrder(this.data.id,this.tarjetaElejida.id).subscribe(data=>{
+
+        let ultimaOrden;
+        this.cardService.getAllCards().subscribe(data=>{
+          ultimaOrden = this.data[0];
+        })
+
+        this.orderService.deliverOrder(ultimaOrden.id,this.tarjetaElejida.id).subscribe(data=>{
           this.orderService.message.next("Se Compro el Producto");})
           this.dialogRef.close();
-      console.log("estas en null")
-
    }
   else{
    console.log(this.data.totalPrice)

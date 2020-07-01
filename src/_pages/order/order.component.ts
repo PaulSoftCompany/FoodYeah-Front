@@ -53,6 +53,15 @@ export class OrderComponent {
 
   ngOnInit() {
 
+    this.orderService.getAllOrders().
+    map((users: Array<Order>) => users.filter(user => user.costumer.username === this.Username ))
+    .subscribe(data => {
+      this.dataSource = new MatTableDataSource<Order>(data);
+      this.dataSource.paginator = this.paginator;
+      this.dataSource.sort = this.sort;
+    });
+
+
     this.User= this.loginService.getUser();
     this.Username = this.loginService.getUserName();
     this.orderService.ordersChange.subscribe(data => {
@@ -64,14 +73,7 @@ export class OrderComponent {
       this.snackBar.open(data, 'Aviso', { duration: 2000 });
     });
     //Obtiene las ordenes del usuario
-    this.orderService.getAllOrders().
-    map((users: Array<Order>) => users.filter(user => user.costumer.username === this.Username ))
-    .subscribe(data => {
-      this.dataSource = new MatTableDataSource<Order>(data);
-      this.dataSource.paginator = this.paginator;
-      this.dataSource.sort = this.sort;
-    });
-
+   
    
   }
 

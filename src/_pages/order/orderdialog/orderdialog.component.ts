@@ -21,6 +21,8 @@ import { MatGridTileHeaderCssMatStyler } from '@angular/material/grid-list';
 })
 
 export class OrderdialogComponent implements OnInit {
+  User:string;
+  Username:string;
   customer: Customer;
   order: Order;
   customers:Array<Customer>;
@@ -36,7 +38,7 @@ export class OrderdialogComponent implements OnInit {
    
 
   
-    let username = this.loginservice.getUserName();
+    this.Username = this.loginservice.getUserName();
 
     this.producto = new Product();
     this.producto = this.dataProduct;
@@ -49,7 +51,7 @@ export class OrderdialogComponent implements OnInit {
     this.customerService.getAllCustomers().subscribe(data=>{
       this.customers = data;
     })
-    this.customerService.getCustomerByUserName(username).subscribe(data=>{
+    this.customerService.getCustomerByUserName(this.Username).subscribe(data=>{
       this.customer = data;
     })
   }
@@ -58,7 +60,8 @@ export class OrderdialogComponent implements OnInit {
     this.order.orderDetails = this.orderDetails;
 
     this.orderService.registerOrder(this.order).subscribe(data => {
-      this.orderService.getAllOrders().subscribe(orders => {
+      this.orderService.getAllOrders().
+      map((users: Array<Order>) => users.filter(user => user.costumer.username === this.Username )).subscribe(orders => {
         this.orderService.ordersChange.next(orders);
         this.orderService.message.next("Se registro");
       });
