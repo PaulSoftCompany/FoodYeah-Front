@@ -22,6 +22,7 @@ export class OrderbuydialogComponent implements OnInit {
   tarjetas:Array<Card>
   tarjetaElejida:Card;
   Username;
+  User:string;
   customer:Customer;
   constructor(private cardService: CardService, private orderService: OrderService, private fb: FormBuilder,
     @Inject(MAT_DIALOG_DATA) public data: Order,
@@ -40,15 +41,24 @@ export class OrderbuydialogComponent implements OnInit {
       cardCvi: new FormControl(''),
       cardExpireDate: new FormControl(''),
     });
+    this.User = this.loginService.getUser();
     this.Username = this.loginService.getUserName();
     this.customerService.getCustomerByUserName(this.Username).subscribe(data=>
       this.customer = data);
-    
+    if(this.User != 'ADMIN'){
     this.cardService.getAllCards().
     map((card: Array<Card>) => card.filter(card => card.customer.username === this.Username )).subscribe(data=>
       this.tarjetas = data);
 
   }
+  else{
+    this.cardService.getAllCards().subscribe(data=>
+      this.tarjetas = data);
+
+  }
+
+
+}
 
   deliverOrder() {
    if(this.tarjetaElejida.cardCvi == null){
