@@ -20,13 +20,13 @@ import { CustomerService } from 'src/_service/customer.service';
 })
 export class CarddialogComponent implements OnInit {
 
-  customers:Array<Customer>
+  customers: Array<Customer>
   form: FormGroup;
   card: Card;
   created: Boolean;
-  constructor(private cardService: CardService, private customerService: CustomerService,private fb: FormBuilder,
-     @Inject(MAT_DIALOG_DATA) public data: Card, private dialogRef: MatDialogRef<CarddialogComponent>) {
-  
+  constructor(private cardService: CardService, private customerService: CustomerService, private fb: FormBuilder,
+    @Inject(MAT_DIALOG_DATA) public data: Card, private dialogRef: MatDialogRef<CarddialogComponent>) {
+
   }
 
   ngOnInit() {
@@ -74,9 +74,9 @@ export class CarddialogComponent implements OnInit {
   registerOrUpdate() {
     let cardCustomer = new Customer();
     cardCustomer = this.form.value['customer'];
-console.log(cardCustomer);
+    console.log(cardCustomer);
     this.card.cardNumber = this.form.value['cardNumber'];
-    this.card.cardType = this.form.value['cardType'];
+    this.card.cardType = this.form.value['cardType'] == "Credito" ? true : false;
     this.card.cardCvi = this.form.value['cardCvi'];
     this.card.cardExpireDate = this.form.value['cardExpireDate'];
     this.card.cardMoney = this.form.value['cardMoney'];

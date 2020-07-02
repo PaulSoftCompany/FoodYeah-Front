@@ -16,16 +16,16 @@ import { Customer } from 'src/_model/customer';
   styleUrls: ['./orderbuydialog.component.css']
 })
 export class OrderbuydialogComponent implements OnInit {
-
+  User: string;
   cards: Array<Card>;
   form: FormGroup;
-  tarjetas:Array<Card>
-  tarjetaElejida:Card;
+  tarjetas: Array<Card>
+  tarjetaElejida: Card;
   Username;
-  customer:Customer;
+  customer: Customer;
   constructor(private cardService: CardService, private orderService: OrderService, private fb: FormBuilder,
     @Inject(MAT_DIALOG_DATA) public data: Order,
-    private dialogRef: MatDialogRef<OrderbuydialogComponent>, private loginService:LoginService,private customerService:CustomerService) {
+    private dialogRef: MatDialogRef<OrderbuydialogComponent>, private loginService: LoginService, private customerService: CustomerService) {
 
   }
 
@@ -41,50 +41,62 @@ export class OrderbuydialogComponent implements OnInit {
       cardExpireDate: new FormControl(''),
     });
     this.Username = this.loginService.getUserName();
-    this.customerService.getCustomerByUserName(this.Username).subscribe(data=>
+    this.customerService.getCustomerByUserName(this.Username).subscribe(data =>
       this.customer = data);
-    
-    this.cardService.getAllCards().
-    map((card: Array<Card>) => card.filter(card => card.customer.username === this.Username )).subscribe(data=>
-      this.tarjetas = data);
 
+
+    this.User = this.loginService.getUser();
+    if (this.User == 'USER') {
+      this.cardService.getAllCards().
+        map((card: Array<Card>) => card.filter(card => card.customer.username === this.Username)).subscribe(data =>
+          this.tarjetas = data);
+    }
+    else {
+      this.cardService.getAllCards().subscribe(data =>
+        this.tarjetas = data);
+    }
   }
 
   deliverOrder() {
-   if(this.tarjetaElejida.cardCvi == null){
-     this.tarjetaElejida.cardCvi = this.form.value['cardCvi'];
-     this.tarjetaElejida.cardExpireDate = this.form.value['cardExpireDate'];
-     this.tarjetaElejida.cardNumber = this.form.value['cardNumber'];
-     this.tarjetaElejida.cardMoney = 200;
-     this.tarjetaElejida.cardOwnerName = this.customer.customerName;
-     this.tarjetaElejida.cardType = true;
-     this.tarjetaElejida.customer = this.customer;
-      this.cardService.registerCard(this.tarjetaElejida).subscribe(data=>
+    if (this.tarjetaElejida.cardCvi == null) {
+      this.tarjetaElejida.cardCvi = this.form.value['cardCvi'];
+      this.tarjetaElejida.cardExpireDate = this.form.value['cardExpireDate'];
+      this.tarjetaElejida.cardNumber = this.form.value['cardNumber'];
+      this.tarjetaElejida.cardMoney = 200;
+      this.tarjetaElejida.cardOwnerName = this.customer.customerName;
+      this.tarjetaElejida.cardType = true;
+      this.tarjetaElejida.customer = this.customer;
+
+      this.cardService.registerCard(this.tarjetaElejida).subscribe(data =>
         this.orderService.message.next("Tarjeta creada")
-        );
+      );
 
-        let ultimaOrden;
-        this.cardService.getAllCards().subscribe(data=>{
-          ultimaOrden = this.data[0];
+      if (this.data.totalPrice > this.tarjetaElejida.cardMoney){
+        console.log("No hay dinero suficiente")
+        this.orderService.message.next("No hay dinero suficiente");
+      }
+      else
+        this.cardService.getAllCards().subscribe(data => {
+          this.orderService.deliverOrder(this.data.id, data.length).subscribe(savings => {
+            this.orderService.message.next("Se Compro el Producto");
+            //this.orderService.ordersChange.next(savings[]);
+            this.dialogRef.close();
+          })
         })
-
-        this.orderService.deliverOrder(ultimaOrden.id,this.tarjetaElejida.id).subscribe(data=>{
-          this.orderService.message.next("Se Compro el Producto");})
-          this.dialogRef.close();
-   }
-  else{
-   console.log(this.data.totalPrice)
-   console.log(this.tarjetaElejida.cardMoney)
-   if(this.data.totalPrice > this.tarjetaElejida.cardMoney)
-   this.orderService.message.next("No hay dinero suficiente");
-   else{
-    this.orderService.deliverOrder(this.data.id,this.tarjetaElejida.id).subscribe(data=>{
-      this.orderService.message.next("Se Compro el Producto");
-      this.dialogRef.close();
     }
-    )
-   }
-  }
+    else {
+      console.log(this.data.totalPrice)
+      console.log(this.tarjetaElejida.cardMoney)
+      if (this.data.totalPrice > this.tarjetaElejida.cardMoney)
+        this.orderService.message.next("No hay dinero suficiente");
+      else {
+        this.orderService.deliverOrder(this.data.id, this.tarjetaElejida.id).subscribe(data => {
+          this.orderService.message.next("Se Compro el Producto");
+          this.dialogRef.close();
+        }
+        )
+      }
+    }
   }
 
 

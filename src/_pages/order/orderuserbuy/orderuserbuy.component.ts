@@ -9,7 +9,6 @@ import { LoginService } from 'src/_service/login.service';
 import { CustomerService } from 'src/_service/customer.service';
 import { Customer } from 'src/_model/customer';
 import { ActivatedRoute, Router } from '@angular/router';
-
 @Component({
   selector: 'app-orderuserbuy',
   templateUrl: './orderuserbuy.component.html',
@@ -61,15 +60,15 @@ export class OrderuserbuyComponent implements OnInit {
     this.customerService.getCustomerByUserName(this.Username).subscribe(data =>
       this.customer = data);
 
-      if(this.User !='ADMIN'){
-    this.cardService.getAllCards().
-      map((card: Array<Card>) => card.filter(card => card.customer.username === this.Username)).subscribe(data =>
-        this.tarjetas = data);
-      }
-      else{
-        this.cardService.getAllCards().subscribe(data =>
+    if (this.User != 'ADMIN') {
+      this.cardService.getAllCards().
+        map((card: Array<Card>) => card.filter(card => card.customer.username === this.Username)).subscribe(data =>
           this.tarjetas = data);
-      }
+    }
+    else {
+      this.cardService.getAllCards().subscribe(data =>
+        this.tarjetas = data);
+    }
   }
 
   deliverOrder() {
@@ -85,31 +84,35 @@ export class OrderuserbuyComponent implements OnInit {
         this.orderService.message.next("Tarjeta creada")
       );
 
-      this.cardService.getAllCards().subscribe(data => {
+      if (this.order.totalPrice > this.tarjetaElejida.cardMoney){
+        this.orderService.message.next("No hay dinero suficiente");
+        console.log("No hay dinero suficiente2")
+      }
+      else
+        this.cardService.getAllCards().subscribe(data => {
 
-      this.orderService.deliverOrder(this.order.id, data.length).subscribe(data => {
-        this.orderService.message.next("Se Compro el Producto");
-        this.router.navigate(['orders']);
-      })
-      })
+          this.orderService.deliverOrder(this.order.id, data.length).subscribe(data => {
+            this.orderService.message.next("Se Compro el Producto");
+            this.router.navigate(['orders']);
+          })
+        })
     }
     else {
       console.log(this.order.totalPrice)
       console.log(this.tarjetaElejida.cardMoney)
-      if (this.order.totalPrice > this.tarjetaElejida.cardMoney){
+      if (this.order.totalPrice > this.tarjetaElejida.cardMoney) {
         this.orderService.message.next("No hay dinero suficiente");
-        console.log("No hay dinero suficiente")
+        console.log("No hay dinero suficiente1")
       }
-        
       else {
         this.orderService.deliverOrder(this.order.id, this.tarjetaElejida.id).subscribe(data => {
           console.log("Si hay dinero suficiente")
           this.orderService.message.next("Se Compro el Producto");
+          this.router.navigate(['orders']);
           //this.dialogRef.close();
         }
         )
       }
-      this.router.navigate(['orders']);
     }
   }
 
