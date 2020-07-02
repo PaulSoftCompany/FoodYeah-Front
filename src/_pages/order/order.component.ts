@@ -52,17 +52,27 @@ export class OrderComponent {
   ) { }
 
   ngOnInit() {
+    this.User= this.loginService.getUser();
+    console.log(this.User);
 
+    if(this.User == 'USER'){
     this.orderService.getAllOrders().
     map((users: Array<Order>) => users.filter(user => user.costumer.username === this.Username ))
     .subscribe(data => {
       this.dataSource = new MatTableDataSource<Order>(data);
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
-    });
+    });}
+    else {
+      this.orderService.getAllOrders()
+    .subscribe(data => {
+      this.dataSource = new MatTableDataSource<Order>(data);
+      this.dataSource.paginator = this.paginator;
+      this.dataSource.sort = this.sort;
+    }
+    )}
 
-
-    this.User= this.loginService.getUser();
+  
     this.Username = this.loginService.getUserName();
     this.orderService.ordersChange.subscribe(data => {
       this.dataSource = new MatTableDataSource<Order>(data);

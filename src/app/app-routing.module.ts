@@ -8,6 +8,8 @@ import { OrderComponent } from 'src/_pages/order/order.component';
 import { ProductlistComponent } from 'src/_pages/product/productlist/productlist.component';
 import { ProductcategoryComponent } from 'src/_pages/productcategory/productcategory.component';
 import { CardComponent } from 'src/_pages/cards/card.component';
+import { OrderuserComponent } from 'src/_pages/order/orderuser/orderuser.component';
+import { OrderuserbuyComponent } from 'src/_pages/order/orderuserbuy/orderuserbuy.component';
 
 
 const routes: Routes = [
@@ -19,10 +21,9 @@ const routes: Routes = [
 {path:'cards',component:CardComponent},
 {path:'productslist',component:ProductlistComponent},
 { path: '', redirectTo: 'login', pathMatch: 'full' },
-{ path: 'orders', redirectTo: 'orders', pathMatch: 'full' },
-{path:'productslist',component:ProductlistComponent},
-{path:'product_categories',component:ProductcategoryComponent}
-
+{path:'orderuserbuy/:id',component:OrderuserbuyComponent},
+{path:'product_categories',component:ProductcategoryComponent},
+{path:'orderuser/:id',component:OrderuserComponent}
 ];
 
 @NgModule({

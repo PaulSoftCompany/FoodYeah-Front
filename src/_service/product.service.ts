@@ -21,8 +21,14 @@ export class ProductService {
     return this.http.get<Product[]>(this.url, {
       headers: new HttpHeaders().set('Authorization',
         `bearer ${access_token}`).set('Content-Type', 'application/json')
+    });
+  }
 
-
+  getProductById(productsId: number){
+    let access_token = JSON.parse(sessionStorage.getItem(environment.TOKEN_NAME)).access_token;
+    return this.http.get<Product[]>(`${this.url}/${productsId}`, {
+      headers: new HttpHeaders().set('Authorization',
+        `bearer ${access_token}`).set('Content-Type', 'application/json')
     });
   }
 

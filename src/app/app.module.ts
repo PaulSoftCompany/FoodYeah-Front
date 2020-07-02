@@ -26,6 +26,8 @@ import { MatNativeDateModule } from '@angular/material/core';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import { OrderbuydialogComponent } from 'src/_pages/order/orderbuydialog/orderbuydialog.component';
 import { CardComponent } from 'src/_pages/cards/card.component';
+import { OrderuserComponent } from 'src/_pages/order/orderuser/orderuser.component';
+import { OrderuserbuyComponent } from 'src/_pages/order/orderuserbuy/orderuserbuy.component';
 
 
 @NgModule({
@@ -43,7 +45,9 @@ import { CardComponent } from 'src/_pages/cards/card.component';
     CategorydialogComponent,
     CardComponent,
     CarddialogComponent,
-    OrderbuydialogComponent
+    OrderbuydialogComponent,
+    OrderuserComponent,
+    OrderuserbuyComponent
   ],
   imports: [
     BrowserModule,

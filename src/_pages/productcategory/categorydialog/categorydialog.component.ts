@@ -26,6 +26,7 @@ export class CategorydialogComponent implements OnInit {
     this.productCategory = new ProductCategory();
     this.productCategory.productCategoryName = this.data.productCategoryName;
     this.productCategory.productCategoryDescription = this.data.productCategoryDescription;
+    this.productCategory.state = 'UPDATED';
     this.productCategory.id= this.data.id;
     
     

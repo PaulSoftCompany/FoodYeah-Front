@@ -26,6 +26,14 @@ export class OrderService {
     });
   }
 
+  getOrderById(orderId: number){
+    let access_token = JSON.parse(sessionStorage.getItem(environment.TOKEN_NAME)).access_token;
+    return this.http.get<Order[]>(`${this.url}/${orderId}`, {
+      headers: new HttpHeaders().set('Authorization',
+        `bearer ${access_token}`).set('Content-Type', 'application/json')
+    });
+  }
+
   registerOrder(orders: Order) {
     let access_token = JSON.parse(sessionStorage.getItem(environment.TOKEN_NAME)).access_token;
     return this.http.post(this.url, orders, {
