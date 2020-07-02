@@ -1,4 +1,4 @@
-<form [formGroup]="form" (ngSubmit)="deliverOrder()">
+<form [formGroup]="form">
     <mat-tab-group>
         <mat-tab label="Pagando Orden">
             <P>Elija una tarjeta</P>
@@ -27,7 +27,7 @@
 
 
             <br>
-            <button mat-raised-button color="primary" type="submit">Pagar</button>
+            <button mat-raised-button color="primary" (click)="deliverOrder()">Pagar</button>
             <button mat-raised-button color="accent" (click)="close()">Cancelar</button>
             <br>
         </mat-tab>

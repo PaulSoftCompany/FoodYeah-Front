@@ -40,6 +40,7 @@ export class OrderbuydialogComponent implements OnInit {
       cardCvi: new FormControl(''),
       cardExpireDate: new FormControl(''),
     });
+    this.User = this.loginService.getUser();
     this.Username = this.loginService.getUserName();
     this.customerService.getCustomerByUserName(this.Username).subscribe(data =>
       this.customer = data);
@@ -56,7 +57,6 @@ export class OrderbuydialogComponent implements OnInit {
         this.tarjetas = data);
     }
   }
-
   deliverOrder() {
     if (this.tarjetaElejida.cardCvi == null) {
       this.tarjetaElejida.cardCvi = this.form.value['cardCvi'];
@@ -71,7 +71,7 @@ export class OrderbuydialogComponent implements OnInit {
         this.orderService.message.next("Tarjeta creada")
       );
 
-      if (this.data.totalPrice > this.tarjetaElejida.cardMoney){
+      if (this.data.totalPrice > this.tarjetaElejida.cardMoney) {
         console.log("No hay dinero suficiente")
         this.orderService.message.next("No hay dinero suficiente");
       }
@@ -90,8 +90,9 @@ export class OrderbuydialogComponent implements OnInit {
       if (this.data.totalPrice > this.tarjetaElejida.cardMoney)
         this.orderService.message.next("No hay dinero suficiente");
       else {
-        this.orderService.deliverOrder(this.data.id, this.tarjetaElejida.id).subscribe(data => {
+        this.orderService.deliverOrder(this.data.id, this.tarjetaElejida.id).subscribe(savings => {
           this.orderService.message.next("Se Compro el Producto");
+          //this.orderService.ordersChange.next(savings[]);
           this.dialogRef.close();
         }
         )
@@ -101,6 +102,7 @@ export class OrderbuydialogComponent implements OnInit {
 
 
   close() {
+    console.log("OE CTMR")
     this.dialogRef.close();
   }
 }
