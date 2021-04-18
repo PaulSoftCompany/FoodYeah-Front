@@ -57,6 +57,9 @@ img{
   margin-top: 0%;
   font-family: 'Varela Round', sans-serif;
 }
+.form-field input.error{
+  border-bottom: 2px solid red;
+}
 .custom-form button {
   text-transform: uppercase;
   letter-spacing: 0.15em;

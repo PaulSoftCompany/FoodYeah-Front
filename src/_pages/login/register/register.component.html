@@ -1,46 +1,53 @@
 
-<div class="register">
-    <form class="custom-form" >
+<div class="content">
+  <div class="register">
+    <form class="custom-form" [formGroup]="registerForm" >
       <h1>Crear cuenta</h1>
+      <div class="form-field">
+        <label>Nombre</label>
+        <input formControlName="nombre" placeholder="Nombre" [ngClass]="{'error': registerForm.get('nombre').errors && (registerForm.get('nombre').touched  || registerForm.get('nombre').dirty)}" />
+        <div class="invalid-feedback" *ngIf="registerForm.get('nombre').errors && (registerForm.get('nombre').touched  || registerForm.get('nombre').dirty)">
+          Por favor escriba un nombre
+        </div>
+      </div>
+     
 
-      <input
-      [(ngModel)]="nombre"
-      placeholder="Nombre"
-      required="required"
-      name="nombre"
-    />
+      <div class="form-field">
+        <label>Edad</label>
+        <input formControlName="edad" placeholder="Edad" type="number" [ngClass]="{'error': registerForm.get('edad').errors && (registerForm.get('edad').touched  || registerForm.get('edad').dirty)}" />
+        <div class="invalid-feedback" *ngIf="registerForm.get('edad').errors && (registerForm.get('edad').touched  || registerForm.get('edad').dirty)">
+          Por favor escriba su edad
+        </div>
+      </div>
+    
 
-    <input
-    [(ngModel)]="edad"
-    placeholder="Edad"
-    required="required"
-    type="number"
-    name="edad"
-  />
+      <div class="form-field">
+        <label >Codigo Institucional</label>
+        <input formControlName="usuario" name="usuario" placeholder="Codigo institucional" [ngClass]="{'error': registerForm.get('usuario').errors && (registerForm.get('usuario').touched  || registerForm.get('usuario').dirty)}"/>
+        <div class="invalid-feedback" *ngIf="registerForm.get('usuario').errors && (registerForm.get('usuario').touched  || registerForm.get('usuario').dirty)">
+          Por favor escriba su código institucional
+        </div>
+      </div>
 
-      <input
-      name="usuario"
-        [(ngModel)]="usuario"
-        placeholder="Codigo institucional"
-        required="required"
-      />
-      <input
-        type="password"
-        [(ngModel)]="password"
-        name="password"
-        placeholder="Contraseña"
-        required="required"
-      />
-      <input
-        type="password"
-        [(ngModel)]="confirmPassword"
-        name="password"
-        placeholder="Repita la contraseña"
-        required="required"
-      />
+      <div class="form-field">
+        <label >Contraseña</label>
+        <input type="password" formControlName="password" placeholder="Contraseña" [ngClass]="{'error': registerForm.get('password').errors && (registerForm.get('password').touched  || registerForm.get('password').dirty)}"/>
+        <div class="invalid-feedback" *ngIf="registerForm.get('password').errors && (registerForm.get('password').touched  || registerForm.get('password').dirty)">
+          Por favor escriba su contraseña
+        </div>
+      </div>
+
+      <div class="form-field">
+        <label >Repita su contraseña</label>
+        <input type="password" formControlName="confirmPassword" placeholder="Repita su contraseña"  [ngClass]="{'error': registerForm.get('confirmPassword').errors && (registerForm.get('confirmPassword').touched  || registerForm.get('confirmPassword').dirty)}"/>
+        <div class="invalid-feedback" *ngIf="registerForm.get('confirmPassword').value != registerForm.get('password').value   && (registerForm.get('confirmPassword').touched  || registerForm.get('confirmPassword').dirty)">
+          Las contraseñas no son iguales
+        </div>
+      </div>
+
       <button type="submit" (click)="registerUser()">Registrarse</button>
-      <br>
       <button type="button" routerLink="/login" >Regresar al login</button>
 
     </form>
   </div>
+</div>

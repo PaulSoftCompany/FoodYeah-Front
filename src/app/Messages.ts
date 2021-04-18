@@ -62,6 +62,7 @@ export class Messages{
   
     // ---- Mensajes de Register ---- //
     public static successRegister = "Esperamos nuestros productos te agraden.";
+    public static errorPasswordValidation = "Las contraseñas no son iguales";
     public static errorFormRegister = "No has llenado los campos correctamente.";
   
     // ---- Mensaje General de Error ---- //
