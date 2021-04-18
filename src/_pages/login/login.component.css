@@ -26,13 +26,13 @@ img{
   margin: auto;
   border-radius: 2.5rem;
   background-color: #dadada;
-  box-shadow: 13px 13px 20px #cbced1, -13px -13px 20px #ffffff;
   color: black;
+  display: flex;
+  flex-direction: column;
   margin-top: 10rem;
 }
 .custom-form input {
   display: block;
-  margin: 2rem 0;
   width: 100%;
   border-radius: 0.5rem;
   padding: 1rem;
@@ -41,6 +41,21 @@ img{
       rgba(0, 0, 0, 0.1);
   border: 0 none;
   background: #ebeef0;
+}
+.form-field{
+  display: flex;
+  flex-direction: column;
+  font-family: 'Varela Round', sans-serif;
+  margin: 0 0 30px 0;
+}
+
+.invalid-feedback{
+  color: red;
+  font-size: 0.8rem;
+}
+.form-field input{
+  margin-top: 0%;
+  font-family: 'Varela Round', sans-serif;
 }
 .custom-form button {
   text-transform: uppercase;

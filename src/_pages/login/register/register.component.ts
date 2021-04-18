@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 
-import {MaterialModule} from 'src/_material/material/material.module'
 import { FormGroup, FormBuilder, FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
 import { PasswordValidation } from './match';

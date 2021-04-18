@@ -1,8 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
 import { environment } from 'src/environments/environment';
-import { JwtHelperService } from '@auth0/angular-jwt';
+
 import { LoginService } from 'src/_service/login.service';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { JwtHelperService } from '@auth0/angular-jwt';
+import { NotificationService } from 'src/_service/notification.service';
+import { Messages } from 'src/app/Messages';
+import { TypesMessages } from 'src/app/TypesOfMessages';
 
 @Component({
   selector: 'app-login',
@@ -11,33 +16,52 @@ import { LoginService } from 'src/_service/login.service';
 })
 export class LoginComponent implements OnInit {
 
-  username: string;
-  password: string;
+ 
   message: string = "";
   error: string = "";
+  loginForm:FormGroup;
 
-  constructor(private loginService: LoginService, private router: Router) { }
+  constructor(private loginService: LoginService, private router: Router,private notificationService:NotificationService) { }
 
   ngOnInit() {
+    this.initialize()
+  }
+
+  initialize(){
+    this.loginForm = new FormGroup({
+      username: new FormControl('',[Validators.required,Validators.email]),
+      password: new FormControl('',[Validators.required])
+    })
   }
 
   logIn() {
-    this.loginService.login(this.username, this.password).subscribe(data => {
-      if (data) {
-        //
-        const helper = new JwtHelperService();
+    let credentials = {
+      username : this.loginForm.get('username').value,
+      password : this.loginForm.get('password').value
+    }
+    
+    if(this.loginForm.valid){
+      this.loginService.login(credentials.username, credentials.password).subscribe(data => {
+        if (data) {
+          const helper = new JwtHelperService();
+          let token = JSON.stringify(data);
+          sessionStorage.setItem(environment.TOKEN_NAME, token);
+          let tk = JSON.parse(sessionStorage.getItem(environment.TOKEN_NAME));
+          const decodedToken = helper.decodeToken(tk.access_token);
+          this.router.navigate(['home']);
+          this.notificationService.OpenSnackbar(Messages.successLogIn,TypesMessages.Success)
+        }
+       
+      },(error)=>{
+        this.notificationService.OpenSnackbar(Messages.errorLogIn,TypesMessages.Error)
 
-        let token = JSON.stringify(data);
-        sessionStorage.setItem(environment.TOKEN_NAME, token);
+      });
+    }
+    else{
+      this.notificationService.OpenSnackbar(Messages.errorFormLogIn,TypesMessages.Error)
 
-        let tk = JSON.parse(sessionStorage.getItem(environment.TOKEN_NAME));
-        //https://www.npmjs.com/package/@auth0/angular-jwt
-        const decodedToken = helper.decodeToken(tk.access_token);
-        
-        console.log(decodedToken);
-        this.router.navigate(['home']);
+    }
 
-      }
-    });
+    
   }
 }
