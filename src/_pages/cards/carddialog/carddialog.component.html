@@ -6,8 +6,12 @@
                 <input matInput placeholder="cardNumber" formControlName="cardNumber" required>
             </mat-form-field>
 
-            <mat-form-field >
-                <input matInput placeholder="cardType" formControlName="cardType" required>
+            <mat-form-field>
+                <mat-label>cardType</mat-label>
+                <mat-select formControlName="cardType" required>
+                    <mat-option value="0">Credito</mat-option>
+                    <mat-option value="1">Debito</mat-option>
+                </mat-select>
             </mat-form-field>
 
             <mat-form-field >

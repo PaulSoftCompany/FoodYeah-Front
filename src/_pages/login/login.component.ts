@@ -16,14 +16,6 @@ import { TypesMessages } from 'src/app/TypesOfMessages';
 })
 export class LoginComponent implements OnInit {
 
-<<<<<<< HEAD
-  username: string;
-  password: string;
-  message: string = "";
-  error: string = "";
-
-  constructor() { }
-=======
  
   message: string = "";
   error: string = "";
@@ -34,16 +26,12 @@ export class LoginComponent implements OnInit {
   ngOnInit() {
     this.initialize()
   }
->>>>>>> test
 
   initialize(){
     this.loginForm = new FormGroup({
       username: new FormControl('',[Validators.required,Validators.email]),
       password: new FormControl('',[Validators.required])
     })
-  }
-  logIn(){
-
   }
 
   logIn() {

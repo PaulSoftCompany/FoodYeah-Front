@@ -40,6 +40,7 @@ export class OrderdialogComponent implements OnInit {
   
     this.Username = this.loginservice.getUserName();
 
+    
     this.producto = new Product();
     this.producto = this.dataProduct;
     this.orderDetails = new Array<OrderDetail>();

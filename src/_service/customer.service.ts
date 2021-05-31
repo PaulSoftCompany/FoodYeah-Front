@@ -1,32 +1,13 @@
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
-<<<<<<< HEAD
-import { HttpClient } from '@angular/common/http';
-import {Customer} from 'src/_model/customer'
-=======
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Customer } from 'src/_model/customer';
 import { Subject } from 'rxjs';
 
->>>>>>> test
 @Injectable({
   providedIn: 'root'
 })
 export class CustomerService {
-<<<<<<< HEAD
-url:string= `${environment.HOST_URL}/customers`;
-
-  constructor(private http:HttpClient) { }
-
-  register(customer: Customer){
-    return this.http.post(this.url,customer);
-  }
-
-  
-
-  
-}
-=======
 
   customersChange = new Subject<Customer[]>();
   message = new Subject<string>();
@@ -53,4 +34,3 @@ url:string= `${environment.HOST_URL}/customers`;
     }
 
 }
->>>>>>> test

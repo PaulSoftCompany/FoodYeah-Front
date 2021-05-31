@@ -2,16 +2,6 @@ import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-<<<<<<< HEAD
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import {MatNativeDateModule} from '@angular/material/core';
-import { MatCardModule  } from '@angular/material/card';
-
-import { MaterialModule } from 'src/_material/material/material.module';
-import { HttpClientModule } from '@angular/common/http';
-import { RegisterComponent } from 'src/_pages/login/register/register.component';
-import { LoginComponent } from 'src/_pages/login/login.component';
-=======
 import { AngularMaterialModule } from 'src/_material/material/material.module';
 import { RegisterComponent } from 'src/_pages/login/register/register.component';
 import { LoginComponent } from 'src/_pages/login/login.component';
@@ -37,15 +27,11 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'; 
 
->>>>>>> test
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-<<<<<<< HEAD
-    RegisterComponent
-=======
     RegisterComponent,
     HomeComponent,
     ProductComponent,
@@ -61,7 +47,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     OrderuserComponent,
     OrderuserbuyComponent,
     NotificationComponent
->>>>>>> test
   ],
   imports: [
     BrowserModule,
@@ -69,18 +54,11 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     BrowserAnimationsModule,
     AngularMaterialModule,
     HttpClientModule,
-<<<<<<< HEAD
-    MaterialModule,
-    MatNativeDateModule,
-    MatCardModule 
- 
-=======
     FormsModule,
     ReactiveFormsModule,
     MatCardModule,
     FlexLayoutModule
 
->>>>>>> test
   ],
   providers: [],
   bootstrap: [AppComponent]

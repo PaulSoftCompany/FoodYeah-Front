@@ -55,7 +55,7 @@
         <ng-container matColumnDef="actions" >
             <th mat-header-cell *matHeaderCellDef >actions</th>
             <td mat-cell *matCellDef="let row" >
-                <button *ngIf="User != 'USER' && row.state != 'DELIVERED'"  mat-button color="primary"  (click)="openBuyDialog(row)" >Pagar</button>
+                <button *ngIf="User != 'ADMIN' && row.state != 'DELIVERED'"  mat-button color="primary"  (click)="openBuyDialog(row)" >Pagar</button>
             </td>
         </ng-container>
         <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>

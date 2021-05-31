@@ -15,8 +15,16 @@
             </mat-form-field>
 
             <mat-form-field>
-                <input matInput type="number" placeholder="Dia de venta" formControlName="sellDay" [formGroup]="form"
-                    required>
+                <mat-label>Día de venta</mat-label>
+                <mat-select formControlName="sellDay" required>
+                    <mat-option value="1">Lunes</mat-option>
+                    <mat-option value="2">Martes</mat-option>
+                    <mat-option value="3">Miercoles</mat-option>
+                    <mat-option value="4">Jueves</mat-option>
+                    <mat-option value="5">Viernes</mat-option>
+                    <mat-option value="6">Sabado</mat-option>
+                    <mat-option value="7">Domingo</mat-option>
+                </mat-select>
             </mat-form-field>
 
             <mat-form-field>

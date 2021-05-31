@@ -25,81 +25,6 @@ import {MatDialogModule} from '@angular/material/dialog';
 import {MatTabsModule} from '@angular/material/tabs';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 
-<<<<<<< HEAD
-
-@NgModule( {
-    imports: [
-        CommonModule,
-        BrowserAnimationsModule,
-        MatCheckboxModule,
-        MatCheckboxModule,
-        MatButtonModule,
-        MatInputModule,
-        MatAutocompleteModule,
-        MatDatepickerModule,
-        MatFormFieldModule,
-        MatRadioModule,
-        MatSelectModule,
-        MatSliderModule,
-        MatSlideToggleModule,
-        MatMenuModule,
-        MatSidenavModule,
-        MatBadgeModule,
-        MatToolbarModule,
-        MatListModule,
-        MatGridListModule,
-        MatCardModule,
-        MatStepperModule,
-        MatTabsModule,
-        MatExpansionModule,
-        MatButtonToggleModule,
-        MatChipsModule,
-        MatIconModule,
-        MatProgressSpinnerModule,
-        MatProgressBarModule,
-        MatDialogModule,
-        MatTooltipModule,
-        MatSnackBarModule,
-        MatTableModule,
-        MatSortModule,
-        MatPaginatorModule,
-        MatMenuModule,
-        MatTabsModule,
-        MatCardModule,
-        MatInputModule,
-        
-        
-    ],
-    exports: [
-        MatButtonModule,
-        MatToolbarModule,
-        MatIconModule,
-        MatMenuModule,
-        MatSidenavModule,
-        MatBadgeModule,
-        MatListModule,
-        MatGridListModule,
-        MatInputModule,
-        MatFormFieldModule,
-        MatSelectModule,
-        MatRadioModule,
-        MatDatepickerModule,
-        MatChipsModule,
-        MatTooltipModule,
-        MatTableModule,
-        MatPaginatorModule,
-        FormsModule,
-        MatTabsModule,
-        MatCardModule,
-        ReactiveFormsModule,
-    ],
-    providers: [
-        MatDatepickerModule,
-    ]
-} )
-
-export class MaterialModule { }
-=======
 @NgModule({
   imports: [  ],
   exports: [
@@ -131,4 +56,3 @@ export class MaterialModule { }
   ]
 })
 export class AngularMaterialModule { }
->>>>>>> test

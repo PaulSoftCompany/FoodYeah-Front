@@ -22,6 +22,7 @@ export class ProductdialogComponent implements OnInit {
   opciones: Array<ProductCategory>;
   form: FormGroup;
   product: Product;
+  sellday: number;
   ingredients: Array<string>;
   created: Boolean;
   constructor(private productService: ProductService, private fb: FormBuilder, @Inject(MAT_DIALOG_DATA) public data: Product,

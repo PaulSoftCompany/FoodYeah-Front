@@ -1,16 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-<<<<<<< HEAD
-import { FormGroup, FormBuilder, FormControl } from '@angular/forms';
-import { Router } from '@angular/router';
-=======
 
->>>>>>> test
 import { PasswordValidation } from './match';
 import { MatSnackBar } from '@angular/material/snack-bar';
-<<<<<<< HEAD
-import { customerCategory } from 'src/_model/customerCategory';
-import { CustomerService } from 'src/_service/customer.service';
-=======
 
 import { RegisterService } from 'src/_service/register.service';
 
@@ -21,7 +12,6 @@ import { Router } from '@angular/router';
 import { NotificationService } from 'src/_service/notification.service';
 import { Messages } from 'src/app/Messages';
 import { TypesMessages } from 'src/app/TypesOfMessages';
->>>>>>> test
 
 @Component({
   selector: 'app-register',
@@ -43,13 +33,9 @@ export class RegisterComponent implements OnInit {
   customer:Customer;
   registerForm:FormGroup;
 
-<<<<<<< HEAD
-  constructor(private customerService: CustomerService,private fb: FormBuilder, private router: Router, private matSnackBar: MatSnackBar) { }
-=======
   constructor(private registerService: RegisterService
     ,private fb: FormBuilder, private router: Router
     ,  private notificationService: NotificationService) { }
->>>>>>> test
 
   ngOnInit(): void {
 
@@ -87,16 +73,9 @@ export class RegisterComponent implements OnInit {
       customerNew.customerCategory = customerCategory;
       
 
-<<<<<<< HEAD
-      this.customerService.register(customer).subscribe(()=>{
-        this.matSnackBar.open('Se creó exitosamente','INFO',{
-          duration:2000
-        });
-=======
       this.registerService.register(customerNew).subscribe(()=>{
         this.notificationService.OpenSnackbar(Messages.successRegister,TypesMessages.Success)
 
->>>>>>> test
         setTimeout(() => {
           this.router.navigate(['login']);
         }, 1500);
