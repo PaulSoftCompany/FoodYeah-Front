@@ -1,0 +1,64 @@
+<div class="example-container">
+    <h1 class="main-title">Creación de orden</h1>
+    <h2 class="main-title">Selecciona los platos para generar tu orden</h2>
+
+    <div *ngIf="product == null">
+        <mat-form-field class="mat-form-field">
+            <mat-label>Clientes</mat-label>
+            <mat-select [(ngModel)]="customer" required>
+                <mat-option *ngFor="let opcion of customers" [value]="opcion">
+                    {{opcion.customerName}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+        <br><br>
+    </div>
+
+    <mat-form-field class="mat-form-field">
+        <mat-label>Productos</mat-label>
+        <mat-select [(ngModel)]="product" required>
+            <mat-option *ngFor="let product of products" [value]="product" required>
+                {{product.productName}}
+            </mat-option>
+        </mat-select>
+        <br><br>
+        <!-- <p>Producto Seleccionado:{{product.productName}}</p> -->
+    </mat-form-field>
+
+
+    <mat-form-field>
+        <mat-label>Cantidad</mat-label>
+        <input matInput type="number" placeholder="Cantidad" #quantity required>
+    </mat-form-field>
+
+    <!--imprimimos los products, con su id y su precio-->
+    <br>
+    <div id="ingredientes">
+        <table style="width:100%">
+            <tr>
+                <th>Producto</th>
+                <th>Cantidad</th>
+            </tr>
+            <tr *ngFor="let orderDetails of orderDetails">
+                <td>{{orderDetails.product.productName}}</td>
+                <td>{{orderDetails.quantity}}</td>
+            </tr>
+        </table>
+    </div>
+
+    <br>
+    <button mat-button type='button' color="primary" (click)="AddOrderDetail(quantity.value)">
+        Agregar
+        <mat-icon>add</mat-icon>
+    </button>
+    <button mat-button type='button' color="warn" (click)="DeleteLastOrderDetial()"> Borrar
+        <mat-icon>delete</mat-icon>
+    </button>
+    <br>
+
+
+    <br>
+    <button mat-raised-button color="primary" (click)="register()">Registrar Orden</button>
+    <button mat-raised-button color="accent" (click)="close()">Cancelar</button>
+    <br>
+</div>

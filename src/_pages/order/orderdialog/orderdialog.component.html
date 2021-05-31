@@ -1,0 +1,64 @@
+<div class="example-container">
+    <div *ngIf="producto == null">
+    <mat-form-field>
+        <mat-label>Clientes</mat-label>
+        <mat-select [(ngModel)]="customer" required>
+            <mat-option *ngFor="let opcion of customers" [value]="opcion">
+                {{opcion.customerName}}
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
+</div>
+
+    <mat-form-field >
+        <mat-label>Productos</mat-label>
+        <mat-select [(ngModel)]="producto" required>
+            <mat-option *ngFor="let producto of productos" [value]="producto">
+                {{producto.productName}}
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
+    <p>Producto Seleccionado: {{producto.productName}}</p>
+
+
+
+   
+
+
+    <mat-form-field>
+        <input matInput type="number" placeholder="Cantidad" #quantity>
+    </mat-form-field>
+
+    <br>
+    <table style="width:100%">
+        <tr>
+            <th>Producto</th>
+            <th>Cantidad</th>
+        </tr>
+        <tr *ngFor="let orderDetails of orderDetails">
+            <td>{{orderDetails.product.id}}</td>
+            <td>{{orderDetails.quantity}}</td>
+        </tr>
+    </table>
+
+    <br>
+    <button mat-button type='button' color="primary" (click)="AddOrderDetail(quantity.value)">
+        Agregar 
+        <mat-icon>add</mat-icon>
+    </button>
+    <button mat-button type='button' color="warn" (click)="DeleteLastOrderDetial()"> Borrar 
+        <mat-icon>delete</mat-icon>
+    </button>
+    <br>
+</div>
+
+<br>
+<button mat-raised-button color="primary" (click)="register()">Registrar Orden</button>
+<button mat-raised-button color="accent" (click)="close()">Cancelar</button>
+<br>
+
+
+
+
+
+

@@ -1,0 +1,67 @@
+<mat-card class="example-card">
+    <mat-card-header>
+      <mat-card-title>Productos</mat-card-title>
+      <mat-card-subtitle>Menu y platos a la carta</mat-card-subtitle>
+    </mat-card-header>
+    <img mat-card-image src="https://cdn.computerhoy.com/sites/navi.axelspringer.es/public/styles/1200/public/media/image/2018/04/295717-que-es-malo-abusar-comida-rapida.png?itok=NWLAbya1" alt="Comida">
+    <mat-card-content>
+      <p>
+      Podras encontrar los platos de menu de la semana o los diferentes platos a la carta.
+      </p>
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-button color="warn" routerLink="/products">Ingresar</button>
+    </mat-card-actions>
+</mat-card>
+
+<mat-card class="example-card" >
+    <mat-card-header>
+      <mat-card-title>Ordenes</mat-card-title>
+      <mat-card-subtitle> Comprar un plato o menu </mat-card-subtitle>
+    </mat-card-header>
+    <img id="imagencarrito" mat-card-image src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c8/Shopping_cart_with_food_clip_art_2.svg/307px-Shopping_cart_with_food_clip_art_2.svg.png" alt="Carrito">
+    <mat-card-content>
+      <p>
+        Procede a comprar los productos requeridos.
+      </p>
+    </mat-card-content>
+    <br>
+    <mat-card-actions>
+      <button mat-button color="warn" routerLink="/orders">Ingresar</button>
+    </mat-card-actions>
+</mat-card>
+
+
+<mat-card class="example-card" *ngIf="User != 'USER'">
+  <mat-card-header>
+    <mat-card-title>Categoria de productos</mat-card-title>
+    <mat-card-subtitle> Categorias de tus diferentes productos </mat-card-subtitle>
+  </mat-card-header>
+  <img id="imagencarrito" mat-card-image src="https://images-na.ssl-images-amazon.com/images/I/613NI2n6vaL._AC_SX522_.jpg" alt="Categoria">
+  <mat-card-content>
+    <p>
+      Administra las categorias de tus productos
+    </p>
+  </mat-card-content>
+  <br>
+  <mat-card-actions>
+    <button mat-button color="warn" routerLink="/product_categories">Ingresar</button>
+  </mat-card-actions>
+</mat-card>
+
+<mat-card class="example-card" *ngIf="User != 'USER'">
+  <mat-card-header>
+    <mat-card-title>Tarjetas</mat-card-title>
+    <mat-card-subtitle> Tarjetas con la que paga el usuario </mat-card-subtitle>
+  </mat-card-header>
+  <img id="imagencarrito" mat-card-image src="https://www.kindpng.com/picc/m/13-130561_credit-card-png-credit-card-transparent-png.png" alt="Categoria">
+  <mat-card-content>
+    <p>
+      Administra las tarjetas registradas por los usuarios
+    </p>
+  </mat-card-content>
+  <br>
+  <mat-card-actions>
+    <button mat-button color="warn" routerLink="/cards">Ingresar</button>
+  </mat-card-actions>
+</mat-card>

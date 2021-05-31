@@ -1,4 +1,5 @@
 
+<<<<<<< HEAD
  <mat-card>
     <mat-card-content>
       <form [formGroup]="form" (ngSubmit)="onSubmit()">
@@ -22,3 +23,33 @@
       </form>
     </mat-card-content>
   </mat-card>
+=======
+
+<div class="login ">
+
+
+    <form class="custom-form mat-elevation-z10" [formGroup]="loginForm">
+        <img src="https://lh3.googleusercontent.com/MzDJzPD66uLAjUBeXSdyCSp5ZAsx8afenfElX77mpMJQDrSo_u5x7_o2Az-CM8DGIabcAOE_x8zXn3UtrXICtT6pvMrcbfsFmxxZ_MzaZW3YStHwmEf80nd9vNNqCLX5wHvyM9SPWlLj5ogKyH5YBgLvuAfeqt1mYkKTlljpV1S8JAbHRnsvbhtAMyGB5I8677ukIhIVOCtArPgxJri0XJz0kKCT1Qn_w6y0_LvRImjap4ev1J-Y6RTOcDSfwZ4KOkNhNNQ5DzJl6w-WQqfQ9Xu6DTudqgVoQV6M4tBZCN7_BdDgfV1mj8OSw0nWdcIaJNUN7I3b6K07mJoHemoRtkJp9GGnVVr28QvL9UKAmQLOPKjQLs6HNM1HApvA1Abatckt0IY4rJJa3wpwfJj_8VDQsP-6r4BK6DcVv8O-37gYcbTPs3DC5ZhgHbTWEgPoN-kYI2HSyJLGim3GSQ9mF5hf01bPM9hlFC4mS4C1yqV3lmzoxsmaryfcOLYI0pnP9SDAhKVYAd9Avgs1yI-u32HYGMIJwvObEpxdPhJFUAYQrURGVatG8TDRZSqNnCli29np0LZqMesblEcicHJM5S-NgKJhtoNyP_Z0jLF5JhTt_bgzIW-FQ9or5vb8gt9ZH-HmbU6uOeI9gnP_RpLqEc8jcN6wPgioI4BMxNgWf9Nusv0AHYCQBruBvQg-Ddo=s969-no?authuser=0"> 
+        <div class="form-field">
+          <label>Usuario</label>
+          <input type="email" formControlName="username" placeholder="Usuario" [ngClass]="{'error': loginForm.get('username').errors && (loginForm.get('username').touched  || loginForm.get('username').dirty) }"/>
+          <div class="invalid-feedback" *ngIf="loginForm.get('username').errors && (loginForm.get('username').touched  || loginForm.get('username').dirty)">
+            Por favor escriba un email correcto
+          </div>
+        </div>
+ 
+      <div class="form-field">
+        <label>Contraseña</label>
+        <input type="password" formControlName="password" placeholder="Constraseña"  [ngClass]="{'error': loginForm.get('password').errors && (loginForm.get('password').touched  || loginForm.get('password').dirty) }" />
+        <div class="invalid-feedback" *ngIf="loginForm.get('password').errors && (loginForm.get('password').touched  || loginForm.get('password').dirty)">
+          Por favor escriba una contraseña
+        </div>
+      </div>
+    
+      <button type="submit" (click)="logIn()">Iniciar Sesion</button>
+      <br>
+      <button id="register" type="button" routerLink="/register">Crear una cuenta</button>
+       <br>
+    </form>
+  </div>
+>>>>>>> test

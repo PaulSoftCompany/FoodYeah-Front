@@ -1,0 +1,41 @@
+<form [formGroup]="form" (ngSubmit)="registerOrUpdate()">
+    <mat-tab-group>
+        <mat-tab label="Card">
+
+            <mat-form-field >
+                <input matInput placeholder="cardNumber" formControlName="cardNumber" required>
+            </mat-form-field>
+
+            <mat-form-field >
+                <input matInput placeholder="cardType" formControlName="cardType" required>
+            </mat-form-field>
+
+            <mat-form-field >
+                <input matInput placeholder="cardCvi" formControlName="cardCvi" [formGroup]="form" required>
+            </mat-form-field>
+
+            <mat-form-field >
+                <input matInput placeholder="cardExpireDate" formControlName="cardExpireDate" [formGroup]="form" required>
+            </mat-form-field>
+
+            <mat-form-field>
+                <mat-label>customer's username</mat-label>
+                <input matInput type="text" formControlName="customer" required [matAutocomplete]="auto">
+                <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
+                    <mat-option *ngFor="let _customer of customers" [value]="_customer">
+                        {{_customer.username}}
+                    </mat-option>
+                </mat-autocomplete>
+            </mat-form-field>
+
+            <mat-form-field >
+                <input matInput placeholder="cardMoney" formControlName="cardMoney" [formGroup]="form" required>
+            </mat-form-field>
+
+            <br>
+            <button mat-raised-button color="primary" type="submit">Registrar</button>
+            <button mat-raised-button color="accent" (click)="close()">Cancelar</button>
+            <br>
+        </mat-tab>
+    </mat-tab-group>
+</form>

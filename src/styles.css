@@ -3,3 +3,23 @@
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+
+.green-snackbar {
+    background: rgb(20, 133, 20);
+    color: white;
+}
+
+.custom-dialog-container .mat-dialog-container {
+    padding: 0;
+}
+
+.red-snackbar {
+    background: rgb(155, 29, 29);
+    color: white;
+}
+
+.yellow-snackbar {
+    background: rgb(204, 204, 110);
+    color: white;
+}

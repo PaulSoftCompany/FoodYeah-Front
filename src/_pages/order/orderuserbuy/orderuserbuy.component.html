@@ -1,0 +1,35 @@
+<form [formGroup]="form" (ngSubmit)="deliverOrder()">
+    <mat-tab-group>
+        <mat-tab label="Pagando Orden">
+            <P>Elija una tarjeta</P>
+            <mat-form-field >
+                <mat-label>Tarjetas</mat-label>
+                <mat-select required  [(value)]="tarjetaElejida">
+                    <mat-option *ngFor="let tarjeta of tarjetas" [value]="tarjeta" >
+                        {{tarjeta.cardNumber}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+            <P>O Registre una nueva tarjeta</P>
+            <mat-form-field >
+                <input matInput placeholder="cardNumber" formControlName="cardNumber" required>
+            </mat-form-field>
+            <mat-form-field >
+                <input matInput placeholder="cardCvi" formControlName="cardCvi" [formGroup]="form" required>
+            </mat-form-field>
+
+              <mat-form-field >
+                <input matInput placeholder="cardExpireDate" formControlName="cardExpireDate" [formGroup]="form" required>
+            </mat-form-field>
+
+
+
+
+
+            <br>
+            <button mat-raised-button color="primary" type="submit">Pagar</button>
+            <button mat-raised-button color="accent" (click)="close()">Cancelar</button>
+            <br>
+        </mat-tab>
+    </mat-tab-group>
+</form>

@@ -123,5 +123,8 @@
       }
     }
   },
-  "defaultProject": "FoodYeahSourceFront"
+  "defaultProject": "FoodYeahSourceFront",
+  "cli": {
+    "analytics": "2c18da90-0ba4-4ac2-a9e3-d47c55c941b4"
+  }
 }
