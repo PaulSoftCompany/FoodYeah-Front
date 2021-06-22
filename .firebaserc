@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "front-food-yeahv2": {
+      "hosting": {
+        "FoodYeahSourceFront": [
+          "front-food-yeahv2"
+        ]
+      }
+    }
+  }
+}
